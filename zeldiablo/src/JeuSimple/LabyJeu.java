@@ -21,6 +21,10 @@ public class LabyJeu implements Jeu {
      */
     private Perso personnage;
     /**
+     * Perso representant le monstre
+     */
+    private Perso monstre;
+    /**
      * Liste des murs du laby
      */
     private boolean[][] murs;
@@ -125,5 +129,9 @@ public class LabyJeu implements Jeu {
      */
     public Perso getPj() {
         return this.personnage;
+    }
+
+    public Perso getMonstre(){
+        return this.monstre;
     }
 }
