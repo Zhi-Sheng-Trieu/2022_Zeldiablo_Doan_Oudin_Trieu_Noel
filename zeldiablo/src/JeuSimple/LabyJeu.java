@@ -11,9 +11,8 @@ public class LabyJeu implements Jeu {
     private Rectangle[] Murs;
 
 
-    public LabyJeu(Circle p, Rectangle[] m){
-        this.Murs = m;
-        this.Personnage = p;
+    public LabyJeu(){
+        this.Personnage = new Circle();
     }
 
 
@@ -21,19 +20,19 @@ public class LabyJeu implements Jeu {
     public void update(double secondes, Clavier clavier) {
         // On déplace le personnage selon les touches du clavier
         if (clavier.droite){
-
+            this.Personnage.setCenterX(this.Personnage.getCenterX() + 1);
         }
 
         if (clavier.gauche){
-
+            this.Personnage.setCenterX(this.Personnage.getCenterX() - 1);
         }
 
         if (clavier.haut){
-
+            this.Personnage.setCenterY(this.Personnage.getCenterY() + 1);
         }
 
         if (clavier.bas){
-
+            this.Personnage.setCenterY(this.Personnage.getCenterY() - 1);
         }
     }
 
