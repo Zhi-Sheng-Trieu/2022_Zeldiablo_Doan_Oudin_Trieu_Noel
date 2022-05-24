@@ -52,25 +52,25 @@ public class LabyJeu implements Jeu  {
     public void update(double secondes, Clavier clavier) {
         // On déplace le personnage selon les touches du clavier
         if (clavier.droite){
-            this.lab.deplacerPerso("droite");
+            this.lab.deplacerPerso("Droite");
             // On met a jour les position du perso
             this.personnage = this.lab.pj;
         }
 
         if (clavier.gauche){
-            this.lab.deplacerPerso("gauche");
+            this.lab.deplacerPerso("Gauche");
             // On met a jour les position du perso
             this.personnage = this.lab.pj;
         }
 
         if (clavier.haut){
-            this.lab.deplacerPerso("haut");
+            this.lab.deplacerPerso("Haut");
             // On met a jour les position du perso
             this.personnage = this.lab.pj;
         }
 
         if (clavier.bas){
-            this.lab.deplacerPerso("bas");
+            this.lab.deplacerPerso("Bas");
             // On met a jour les position du perso
             this.personnage = this.lab.pj;
         }
