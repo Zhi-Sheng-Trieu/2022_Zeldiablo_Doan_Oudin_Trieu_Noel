@@ -53,18 +53,26 @@ public class LabyJeu implements Jeu  {
         // On déplace le personnage selon les touches du clavier
         if (clavier.droite){
             this.lab.deplacerPerso("droite");
+            // On met a jour les position du perso
+            this.personnage = this.lab.pj;
         }
 
         if (clavier.gauche){
             this.lab.deplacerPerso("gauche");
+            // On met a jour les position du perso
+            this.personnage = this.lab.pj;
         }
 
         if (clavier.haut){
             this.lab.deplacerPerso("haut");
+            // On met a jour les position du perso
+            this.personnage = this.lab.pj;
         }
 
         if (clavier.bas){
             this.lab.deplacerPerso("bas");
+            // On met a jour les position du perso
+            this.personnage = this.lab.pj;
         }
     }
 
@@ -88,13 +96,17 @@ public class LabyJeu implements Jeu  {
     }
 
     /**
-     * getter
+     * Permet de recuperer le mur
      */
     public boolean[][] getMurs(){
         return this.murs;
     }
 
+    /**
+     * permet de recuperer le personnage
+     * @return
+     */
     public Perso getPj(){
-        return this.personnage
+        return this.personnage;
     }
 }
