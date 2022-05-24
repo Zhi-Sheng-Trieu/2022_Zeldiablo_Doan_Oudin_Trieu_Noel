@@ -17,7 +17,7 @@ public class MainLaby {
         int width = labyJeu.getLength()*LabyDessin.TAILLE;
         int height = labyJeu.getLengthY()*LabyDessin.TAILLE;
 
-        int fps = 100;
+        int fps = 10;
 
         MoteurJeu.setTaille(width, height);
         MoteurJeu.setFPS(fps);
