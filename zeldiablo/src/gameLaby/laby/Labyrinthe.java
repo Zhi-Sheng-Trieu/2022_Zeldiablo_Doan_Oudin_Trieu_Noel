@@ -125,6 +125,7 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         // On ajoute le monstre si il y en a un
                         this.monstre = new Perso(colonne, numeroLigne);
+                        break;
 
                     default:
                         throw new Error("caractere inconnu " + c);
