@@ -131,6 +131,10 @@ public class LabyJeu implements Jeu {
         return this.personnage;
     }
 
+    /**
+     * Permet de recup le monstre
+     * @return
+     */
     public Perso getMonstre(){
         return this.monstre;
     }
