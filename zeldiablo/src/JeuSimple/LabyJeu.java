@@ -17,13 +17,17 @@ import java.util.ArrayList;
 public class LabyJeu implements Jeu  {
 
     /**
-     * Cercle representant le personnage
+     * Perso representant le personnage
      */
     private Perso personnage;
     /**
      * Liste des murs du laby
      */
     private boolean[][] murs;
+    /**
+     * Labyrinthe du jeu
+     */
+    private Labyrinthe lab;
 
 
     /**
@@ -32,8 +36,8 @@ public class LabyJeu implements Jeu  {
      */
     public LabyJeu(String nom) throws IOException {
         // On cree un nouveau labyrinthe a partir du nom donné en param
-        Labyrinthe lab = new Labyrinthe(nom);
-
+        Labyrinthe laby = new Labyrinthe(nom);
+        this.lab = laby;
         this.murs = lab.murs;
         this.personnage = lab.pj;
     }
@@ -48,19 +52,19 @@ public class LabyJeu implements Jeu  {
     public void update(double secondes, Clavier clavier) {
         // On déplace le personnage selon les touches du clavier
         if (clavier.droite){
-            this.personnage.setCenterX(this.personnage.getCenterX() + 1);
+            this.lab.deplacerPerso("droite");
         }
 
         if (clavier.gauche){
-            this.personnage.setCenterX(this.personnage.getCenterX() - 1);
+            this.lab.deplacerPerso("gauche");
         }
 
         if (clavier.haut){
-            this.personnage.setCenterY(this.personnage.getCenterY() + 1);
+            this.lab.deplacerPerso("haut");
         }
 
         if (clavier.bas){
-            this.personnage.setCenterY(this.personnage.getCenterY() - 1);
+            this.lab.deplacerPerso("bas");
         }
     }
 
