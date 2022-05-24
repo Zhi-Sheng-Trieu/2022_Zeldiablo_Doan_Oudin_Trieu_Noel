@@ -19,13 +19,30 @@ public class LabyJeu implements Jeu {
 
     @Override
     public void update(double secondes, Clavier clavier) {
+        // On déplace le personnage selon les touches du clavier
+        if (clavier.droite){
 
+        }
+
+        if (clavier.gauche){
+
+        }
+
+        if (clavier.haut){
+
+        }
+
+        if (clavier.bas){
+
+        }
     }
+
 
     @Override
     public void init() {
-
+        // On initialise le labyrinthe
     }
+
 
     @Override
     public boolean etreFini() {
