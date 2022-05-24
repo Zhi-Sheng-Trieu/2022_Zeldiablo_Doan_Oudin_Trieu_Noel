@@ -30,7 +30,7 @@ public class Labyrinthe {
     public static final String DROITE = "Droite";
 
     /**
-     * attribut du personnage
+     * attribut du personnage0
      */
     public Perso pj;
     /**
