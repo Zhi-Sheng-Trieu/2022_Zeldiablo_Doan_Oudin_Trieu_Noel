@@ -9,7 +9,7 @@ import moteurJeu.Jeu;
 public class LabyDessin implements DessinJeu {
 
 
-    public  final static int TAILLE = 20;
+    public final static int TAILLE = 20;
 
     /**
      * affiche l'etat du jeu dans le canvas passe en parametre

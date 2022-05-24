@@ -96,6 +96,24 @@ public class LabyJeu implements Jeu  {
     }
 
     /**
+     * return taille selon Y
+     *
+     * @return
+     */
+    public int getLengthY() {
+        return murs[0].length;
+    }
+
+    /**
+     * return taille selon X
+     *
+     * @return
+     */
+    public int getLength() {
+        return murs.length;
+    }
+
+    /**
      * Permet de recuperer le mur
      */
     public boolean[][] getMurs(){
