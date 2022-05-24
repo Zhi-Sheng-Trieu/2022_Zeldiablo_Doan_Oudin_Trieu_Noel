@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "main" as main
+participant "moteur : MoteurJeu" as moteur
+participant "labyJeu : LabyJeu" as labyJeu
+participant "labyDessin : LabyDessin" as labyDessin
+
+activate main
+    create labyJeu
+    main -> labyJeu: new
+    create labyDessin
+    main -> labyDessin: new
+    activate moteur
+    main -> moteur: setTaille(width, height)
+    main <-- moteur
+    main -> moteur: setFPS(fps)
+    main <-- moteur
+    main -> moteur : lunch(labyJeu, labyDessin)
+    main <-- moteur
+deactivate main
+
+@enduml
