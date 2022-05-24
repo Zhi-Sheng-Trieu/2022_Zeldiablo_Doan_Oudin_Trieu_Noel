@@ -45,6 +45,7 @@ public class LabyJeu implements Jeu {
         this.lab = laby;
         this.murs = lab.murs;
         this.personnage = lab.pj;
+        this.monstre = lab.monstre;
     }
 
 
