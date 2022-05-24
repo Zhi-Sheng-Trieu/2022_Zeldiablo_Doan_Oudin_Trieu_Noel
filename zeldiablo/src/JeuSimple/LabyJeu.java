@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Classe pour representer le jeu
  */
-public class LabyJeu implements Jeu  {
+public class LabyJeu implements Jeu {
 
     /**
      * Perso representant le personnage
@@ -32,6 +32,7 @@ public class LabyJeu implements Jeu  {
 
     /**
      * Constructeur a partir du nom d'un labyrinthe
+     *
      * @param nom le nom du labyrinthe a charger
      */
     public LabyJeu(String nom) throws IOException {
@@ -45,35 +46,31 @@ public class LabyJeu implements Jeu  {
 
     /**
      * Met a jour le jeu
+     *
      * @param secondes temps ecoule depuis la derniere mise a jour
-     * @param clavier objet contenant l'état du clavier'
+     * @param clavier  objet contenant l'état du clavier'
      */
     @Override
     public void update(double secondes, Clavier clavier) {
-        // On déplace le personnage selon les touches du clavier
+        // On déplace le personnage selon les touches du perso
         if (clavier.droite){
             this.lab.deplacerPerso("Droite");
-            // On met a jour les position du perso
-            this.personnage = this.lab.pj;
         }
 
         if (clavier.gauche){
             this.lab.deplacerPerso("Gauche");
-            // On met a jour les position du perso
-            this.personnage = this.lab.pj;
         }
 
         if (clavier.haut){
             this.lab.deplacerPerso("Haut");
-            // On met a jour les position du perso
-            this.personnage = this.lab.pj;
         }
 
         if (clavier.bas){
             this.lab.deplacerPerso("Bas");
-            // On met a jour les position du perso
-            this.personnage = this.lab.pj;
         }
+
+        // On met a jour les position du perso
+        this.personnage = this.lab.pj;
     }
 
 
@@ -88,6 +85,7 @@ public class LabyJeu implements Jeu  {
 
     /**
      * Le jeu ne finit pas
+     *
      * @return
      */
     @Override
@@ -116,15 +114,16 @@ public class LabyJeu implements Jeu  {
     /**
      * Permet de recuperer le mur
      */
-    public boolean[][] getMurs(){
+    public boolean[][] getMurs() {
         return this.murs;
     }
 
     /**
      * permet de recuperer le personnage
+     *
      * @return
      */
-    public Perso getPj(){
+    public Perso getPj() {
         return this.personnage;
     }
 }
