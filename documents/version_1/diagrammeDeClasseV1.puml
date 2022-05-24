@@ -1,0 +1,65 @@
+@startuml
+
+class Labyrinthe{
+    {static} +MUR : char
+    {static} +PJ : char
+    {static} +VIDE : char
+    {static} +HAUT : String
+    {static} +BAS : String
+    {static} +GAUCHE : String
+    {static} +DROITE : String
+    +murs : boolean[][]
+
+    +Labyrinthe(String nomFichier) : Labyrinthe
+    {static}+getSuivant(int x, int y, String action) : int[]
+    +deplacerPerso(String action) : void
+    +etreFini() : boolean
+    +getLenghtY() : int
+    +getLenght() : int
+    +getMur(int x, int y) : boolean
+
+
+}
+class Perso {
+    +x : int
+    +y : int
+    +Perso(int dx, int dy) : Perso
+    +etrePresent(int dx, int dy) : boolean
+    +getX() : int
+    +getY() : int
+}
+
+Labyrinthe "1"-->"1" Perso : +pj
+
+
+class LabyJeu{
+    - murs : boolean [][]
+    + LabyJeu(String nom)
+    + update(Double seconde, Clavier clavier)
+    + init()
+    + estFini() : boolean
+    + getLenght() : int
+    + getLenghtY() : int
+    + getMur() : boolean [][]
+    + getPj() : Perso
+}
+
+LabyJeu "1" --> "1" Perso : -personnage
+LabyJeu "1" -> "1" Labyrinthe : -lab
+
+interface DessinJeu{
+    + dessinerJeu(Jeu jeu, Canvas canvas)
+}
+
+LabyDessin ..|> DessinJeu
+
+class LabyDessin{
+    + TAILLE : int
+    + dessinerJeu(Jeu jeu, Canvas canvas)
+    + creeRectangle(GraphicsContext gc, int x, int y)
+}
+
+
+
+
+@enduml
