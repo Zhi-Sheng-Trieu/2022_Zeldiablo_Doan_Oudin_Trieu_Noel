@@ -35,7 +35,7 @@ public class LabyDessin implements DessinJeu {
         }
 
         gc.setFill(Color.RED);
-        gc.fillOval(ljeu.getPj().getX(),ljeu.getPj().getY(),TAILLE,TAILLE);
+        gc.fillOval(ljeu.getPj().getX()*TAILLE,ljeu.getPj().getY()*TAILLE,TAILLE,TAILLE);
     }
 
     public void creerRectangle(GraphicsContext gc, int x, int y){
