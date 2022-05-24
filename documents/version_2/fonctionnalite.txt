@@ -30,3 +30,18 @@
   - le monstre ne peut pas se déplacer sur mur. S'il tente de se déplacer sur cette case, il ne bouge pas.
   - le monstre ne peut pas se trouver sur la même case que le personnage.
 
+5. Ouverture de Passages secrets
+- Descriptif :
+  - Lorsque une entité (héros ou monstre) arrive sur une case d'ouverture, le labyrinthe
+    se modie et la porte liée à cette case (située à un autre endroit dans le labyrinthe)
+    s'ouvre.
+- Critères de validation :
+  - Une porte est un type de case particulière. Une porte n'a pas d'orientation et
+occupe toute une case.
+  - Une porte peut être fermée ou ouverte. Une porte fermée bloque le trajet et une
+    porte ouverte est traversable.
+  - La porte s'ouvre au passage du personnage sur la case qui déclenche son ouverture.
+  - Une fois la porte ouverte, elle reste ouverte.
+  - Les portes sont achées d'une manière particulière : elles sont de couleur noire et
+    sont représentées par des carrés qui occupent toute la case. Le carré est plein ou
+    vide en fonction de l'état de la porte (ouverte/fermée).
