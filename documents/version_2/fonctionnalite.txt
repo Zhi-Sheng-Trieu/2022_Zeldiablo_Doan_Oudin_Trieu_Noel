@@ -45,3 +45,9 @@
   - Les portes sont achées d'une manière particulière : elles sont de couleur noire et
     sont représentées par des carrés qui occupent toute la case. Le carré est plein ou
     vide en fonction de l'état de la porte (ouverte/fermée).
+
+
+
+Génération de Monstres immobiles : OUDIN Clement, DOAN Lancelot
+
+Ouvertures de passages secrets : TRIEU Zhi Sheng, NOEL Alexandre
