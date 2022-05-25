@@ -1,0 +1,28 @@
+@startuml
+participant "main" as main
+participant "laby: Labyrinthe" as laby
+participant "bouton : BoutonPassage" as bouton
+participant "passageSecret : PassageSecret" as passageSecret
+
+create laby
+activate main
+    activate laby
+        main -> laby : new
+        create bouton
+        laby -> bouton : new
+        create passageSecret
+        laby -> passageSecret : new
+        main -> laby : deplacerPerso(Gauche)
+        activate bouton
+        laby -> bouton : activerPassage()
+        activate passageSecret
+            bouton -> passageSecret : ouvrirPassage()
+            passageSecret --> bouton
+        deactivate passageSecret
+        bouton --> laby
+        deactivate bouton
+        laby --> main
+    deactivate laby
+deactivate main
+
+@enduml
