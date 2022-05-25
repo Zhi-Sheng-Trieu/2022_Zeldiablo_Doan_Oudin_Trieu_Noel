@@ -37,7 +37,7 @@
     s'ouvre.
 - Critères de validation :
   - Une porte est un type de case particulière. Une porte n'a pas d'orientation et
-occupe toute une case.
+    occupe toute une case.
   - Une porte peut être fermée ou ouverte. Une porte fermée bloque le trajet et une
     porte ouverte est traversable.
   - La porte s'ouvre au passage du personnage sur la case qui déclenche son ouverture.

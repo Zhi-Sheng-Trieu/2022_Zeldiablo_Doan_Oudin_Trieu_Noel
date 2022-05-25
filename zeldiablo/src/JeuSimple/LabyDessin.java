@@ -38,8 +38,10 @@ public class LabyDessin implements DessinJeu {
         gc.fillOval(ljeu.getPj().getX() * TAILLE, ljeu.getPj().getY() * TAILLE, TAILLE, TAILLE);
 
         if (ljeu.getMonstre() != null) {
-            gc.setFill(Color.VIOLET);
-            gc.fillOval(ljeu.getMonstre().getX() * TAILLE, ljeu.getMonstre().getY() * TAILLE, TAILLE, TAILLE);
+            for (int i = 0; i < ljeu.getMonstre().size(); i++) {
+                gc.setFill(Color.VIOLET);
+                gc.fillOval(ljeu.getMonstre().get(i).getX() * TAILLE, ljeu.getMonstre().get(i).getY() * TAILLE, TAILLE, TAILLE);
+            }
         }
     }
 
