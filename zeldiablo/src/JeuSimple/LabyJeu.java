@@ -34,6 +34,8 @@ public class LabyJeu implements Jeu {
     private Labyrinthe lab;
 
 
+
+
     /**
      * Constructeur a partir du nom d'un labyrinthe
      *
