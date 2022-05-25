@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static JeuSimple.LabyDessin.TAILLE;
+
 /**
  * classe labyrinthe. represente un labyrinthe avec
  * <ul> des murs </ul>
