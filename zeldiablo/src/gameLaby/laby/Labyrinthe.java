@@ -20,7 +20,9 @@ public class Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char VIDE = '.';
-    public static  final char MONSTRE = 'M';
+    public static final char MONSTRE = 'M';
+    public static final char PASSAGE = '#';
+    public static final char BOUTON = '*';
 
     /**
      * constantes actions possibles
@@ -31,13 +33,19 @@ public class Labyrinthe {
     public static final String DROITE = "Droite";
 
     /**
-     * attribut du personnage0
+     * attribut du personnage
      */
     public Perso pj;
     /**
      * attribut du monstre
      */
     public ArrayList<Monstre> monstre;
+
+    /**
+     * attribut du passage secret
+     */
+    public PassageSecret passageSecret;
+    public BoutonPassage boutonPassage;
 
     /**
      * les murs du labyrinthe
@@ -99,6 +107,9 @@ public class Labyrinthe {
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
         this.monstre = new ArrayList<Monstre>();
+        this.passageSecret = null;
+        this.boutonPassage = null;
+
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -106,6 +117,8 @@ public class Labyrinthe {
         // stocke les indices courants
         int numeroLigne = 0;
 
+        Position pos_passage = null;
+        Position pos_bouton = null;
         // parcours le fichier
         while (ligne != null) {
 
@@ -130,15 +143,28 @@ public class Labyrinthe {
                         // On ajoute le monstre si il y en a un
                         this.monstre.add(new Monstre(colonne, numeroLigne));
                         break;
-
+                    case PASSAGE:
+                        this.murs[colonne][numeroLigne] = false;
+                        pos_passage = new Position(colonne, numeroLigne);
+                        break;
+                    case BOUTON:
+                        this.murs[colonne][numeroLigne] = false;
+                        pos_bouton = new Position(colonne, numeroLigne);
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
             }
 
+
             // lecture
             ligne = bfRead.readLine();
             numeroLigne++;
+        }
+        //si on a trouvé un passage secret dans le fichier texte
+        if (pos_passage != null) {
+            this.passageSecret = new PassageSecret(pos_passage);
+            this.boutonPassage = new BoutonPassage(pos_bouton, passageSecret);
         }
 
         // ferme fichier
@@ -160,18 +186,35 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur ou un monstre, on effectue le deplacement
+
         for (int i = 0; i < this.monstre.size(); i++) {
 
             if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.get(i).getX() != suivante[0] || this.monstre.get(i).getY() != suivante[1])) {
                 // on met a jour personnage
                 this.pj.x = suivante[0];
                 this.pj.y = suivante[1];
+            } else {
+                break;
+            }
+
+        }
+
+    }
+
+    public boolean deplacementPossible(int[] suivant) {
+        boolean possible = false;
+        for (int i = 0; i < this.monstre.size(); i++) {
+            if (!this.murs[suivant[0]][suivant[1]]
+                    && (this.monstre.get(i).getX() != suivant[0] && this.monstre.get(i).getY() != suivant[1])
+                    && this.passageSecret.etreOuvert()) {
+                possible = true;
             }
             else{
+                possible = false;
                 break;
             }
         }
-
+        return possible;
     }
 
 
@@ -208,6 +251,7 @@ public class Labyrinthe {
 
     /**
      * return mur en (i,j)
+     *
      * @param x
      * @param y
      * @return

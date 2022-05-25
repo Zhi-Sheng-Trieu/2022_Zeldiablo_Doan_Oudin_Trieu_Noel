@@ -43,6 +43,8 @@ public class LabyJeu implements Jeu {
     private static int limite = 5;
 
 
+
+
     /**
      * Constructeur a partir du nom d'un labyrinthe
      *
