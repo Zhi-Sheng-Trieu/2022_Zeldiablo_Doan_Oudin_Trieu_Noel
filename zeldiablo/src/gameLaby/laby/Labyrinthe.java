@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static JeuSimple.LabyDessin.TAILLE;
 
@@ -36,7 +37,7 @@ public class Labyrinthe {
     /**
      * attribut du monstre
      */
-    public Perso monstre;
+    public ArrayList<Monstre> monstre;
 
     /**
      * les murs du labyrinthe
@@ -97,7 +98,7 @@ public class Labyrinthe {
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
-        this.monstre = null;
+        this.monstre = new ArrayList<Monstre>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -127,7 +128,7 @@ public class Labyrinthe {
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
                         // On ajoute le monstre si il y en a un
-                        this.monstre = new Perso(colonne, numeroLigne);
+                        this.monstre.add(new Monstre(colonne, numeroLigne));
                         break;
 
                     default:
@@ -159,10 +160,16 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur ou un monstre, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.getX() != suivante[0] || this.monstre.getY() != suivante[1])) {
-            // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+        for (int i = 0; i < this.monstre.size(); i++) {
+
+            if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.get(i).getX() != suivante[0] || this.monstre.get(i).getY() != suivante[1])) {
+                // on met a jour personnage
+                this.pj.x = suivante[0];
+                this.pj.y = suivante[1];
+            }
+            else{
+                break;
+            }
         }
 
     }
