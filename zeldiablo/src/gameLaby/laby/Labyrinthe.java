@@ -189,7 +189,7 @@ public class Labyrinthe {
 
         for (int i = 0; i < this.monstre.size(); i++) {
 
-            if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.get(i).getX() != suivante[0] || this.monstre.get(i).getY() != suivante[1])) {
+            if (this.deplacementPossible(suivante)) {
                 // on met a jour personnage
                 this.pj.x = suivante[0];
                 this.pj.y = suivante[1];
@@ -205,7 +205,7 @@ public class Labyrinthe {
         boolean possible = false;
         for (int i = 0; i < this.monstre.size(); i++) {
             if (!this.murs[suivant[0]][suivant[1]]
-                    && (this.monstre.get(i).getX() != suivant[0] && this.monstre.get(i).getY() != suivant[1])
+                    && (this.monstre.get(i).getX() != suivant[0] || this.monstre.get(i).getY() != suivant[1])
                     && this.passageSecret.etreOuvert()) {
                 possible = true;
             }
