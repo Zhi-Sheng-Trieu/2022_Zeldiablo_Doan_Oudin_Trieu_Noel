@@ -71,8 +71,8 @@ public class LabyJeu implements Jeu {
                     arret = true;
                 }
             }
-            x = (int)Math.round(Math.random()* (this.getLength()-1))+1;
-            y = (int)Math.round(Math.random()* (this.getLengthY()-1))+1;
+            x = (int)Math.round(Math.random()* (this.getLength()-1));
+            y = (int)Math.round(Math.random()* (this.getLengthY()-1));
         }
     }
 

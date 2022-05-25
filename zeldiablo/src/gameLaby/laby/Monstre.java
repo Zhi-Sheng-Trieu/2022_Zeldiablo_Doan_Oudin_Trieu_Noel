@@ -8,7 +8,7 @@ public class Monstre {
     /**
      * position du personnage
      */
-    int x, y;
+    private Position pos;
 
     /**
      * constructeur
@@ -17,8 +17,7 @@ public class Monstre {
      * @param dy position selon y
      */
     public Monstre(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        pos = new Position(dx,dy);
     }
 
     /**
@@ -30,7 +29,7 @@ public class Monstre {
      */
     public boolean etrePresent(int dx, int dy) {
 
-        return (this.x == dx && this.y == dy);
+        return (this.pos.getX() == dx && this.pos.getY() == dy);
     }
 
     // ############################################
@@ -38,19 +37,19 @@ public class Monstre {
     // ############################################
 
     /**
-     * @return position x du personnage
+     * @return position x du monstre
      */
     public int getX() {
         // getter
-        return this.x;
+        return this.pos.getX();
     }
 
     /**
-     * @return position y du personnage
+     * @return position y du monstre
      */
     public int getY() {
         //getter
-        return this.y;
+        return this.pos.getY();
     }
 }
 
