@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static JeuSimple.LabyDessin.TAILLE;
 
@@ -38,7 +39,7 @@ public class Labyrinthe {
     /**
      * attribut du monstre
      */
-    public Perso monstre;
+    public ArrayList<Monstre> monstre;
 
     /**
      * attribut du passage secret
@@ -105,9 +106,10 @@ public class Labyrinthe {
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
-        this.monstre = null;
+        this.monstre = new ArrayList<Monstre>();
         this.passageSecret = null;
         this.boutonPassage = null;
+
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -139,7 +141,7 @@ public class Labyrinthe {
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
                         // On ajoute le monstre si il y en a un
-                        this.monstre = new Perso(colonne, numeroLigne);
+                        this.monstre.add(new Monstre(colonne, numeroLigne));
                         break;
                     case PASSAGE:
                         this.murs[colonne][numeroLigne] = false;
@@ -160,7 +162,7 @@ public class Labyrinthe {
             numeroLigne++;
         }
         //si on a trouvé un passage secret dans le fichier texte
-        if (pos_passage!=null){
+        if (pos_passage != null) {
             this.passageSecret = new PassageSecret(pos_passage);
             this.boutonPassage = new BoutonPassage(pos_bouton, passageSecret);
         }
@@ -184,32 +186,47 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur ou un monstre, on effectue le deplacement
-        if (deplacementPossible(suivante)) {
-            // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+
+        for (int i = 0; i < this.monstre.size(); i++) {
+
+            if (this.deplacementPossible(suivante)) {
+                // on met a jour personnage
+                this.pj.x = suivante[0];
+                this.pj.y = suivante[1];
+            } else {
+                break;
+            }
+
         }
 
     }
 
-    public boolean deplacementPossible(int[] suivant){
+
+    public boolean deplacementPossible(int[] suivant) {
         boolean valide = false;
-        if (!this.murs[suivant[0]][suivant[1]]){
+        if (!this.murs[suivant[0]][suivant[1]]) {
             valide = true;
-            if (this.monstre != null){
-                if (this.monstre.getX() != suivant[0] && this.monstre.getY() != suivant[1]){
-                    valide = true;
-                }
+
+            if (this.passageSecret != null) {
+                valide = this.passageSecret.etreOuvert();
             }
 
-            if (this.passageSecret != null){
-                if (this.passageSecret.etreOuvert()){
-                    valide = true;
+            if (this.monstre != null && valide) {
+                //parcours tous les monstres
+                for (int i = 0; i < this.monstre.size(); i++) {
+                    //test si la place est libre
+                    if (this.monstre.get(i).getX() != suivant[0] || this.monstre.get(i).getY() != suivant[1]) {
+                        valide = true;
+                    } else {
+                        valide = false;
+                        break;
+                    }
                 }
             }
         }
         return valide;
     }
+
 
 
     /**
@@ -245,6 +262,7 @@ public class Labyrinthe {
 
     /**
      * return mur en (i,j)
+     *
      * @param x
      * @param y
      * @return

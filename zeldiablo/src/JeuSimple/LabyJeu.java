@@ -3,9 +3,8 @@ package JeuSimple;
 import gameLaby.laby.BoutonPassage;
 import gameLaby.laby.Labyrinthe;
 import gameLaby.laby.PassageSecret;
+import gameLaby.laby.Monstre;
 import gameLaby.laby.Perso;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
@@ -25,7 +24,7 @@ public class LabyJeu implements Jeu {
     /**
      * Perso representant le monstre
      */
-    private Perso monstre;
+    private ArrayList<Monstre> monstre;
     /**
      * Liste des murs du laby
      */
@@ -37,6 +36,16 @@ public class LabyJeu implements Jeu {
      * Labyrinthe du jeu
      */
     private Labyrinthe lab;
+
+    /**
+     * Compteur de deplacement
+     */
+    private int compteur;
+
+    /**
+     * Limite de monstre
+     */
+    private static int limite = 5;
 
 
 
@@ -55,6 +64,23 @@ public class LabyJeu implements Jeu {
         this.monstre = lab.monstre;
         this.passageSecret = lab.passageSecret;
         this.boutonPassage = lab.boutonPassage;
+        this.compteur = 0;
+    }
+
+    public void ajouterMonstre(){
+        int x = (int)Math.round(Math.random()* (this.getLength()-1))+1;
+        int y = (int)Math.round(Math.random()* (this.getLengthY()-1))+1;
+        boolean arret = false;
+        while (!arret){
+            for(int i = 0; i < monstre.size(); i ++){
+                if(!this.murs[x][y] && (this.monstre.get(i).getX() != x || this.monstre.get(i).getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)){
+                    this.monstre.add(new Monstre(x,y));
+                    arret = true;
+                }
+            }
+            x = (int)Math.round(Math.random()* (this.getLength()-1));
+            y = (int)Math.round(Math.random()* (this.getLengthY()-1));
+        }
     }
 
 
@@ -66,6 +92,7 @@ public class LabyJeu implements Jeu {
      */
     @Override
     public void update(double secondes, Clavier clavier) {
+        this.compteur+=1;
         // On déplace le personnage selon les touches du perso
         if (clavier.droite){
             this.lab.deplacerPerso("Droite");
@@ -81,6 +108,11 @@ public class LabyJeu implements Jeu {
 
         if (clavier.bas){
             this.lab.deplacerPerso("Bas");
+        }
+
+        if(this.compteur == 20 && this.monstre.size() <= this.limite){
+            this.ajouterMonstre();
+            this.compteur = 0;
         }
 
         // On met a jour les position du perso
@@ -145,7 +177,7 @@ public class LabyJeu implements Jeu {
      * Permet de recup le monstre
      * @return
      */
-    public Perso getMonstre(){
+    public ArrayList<Monstre> getMonstre(){
         return this.monstre;
     }
 
