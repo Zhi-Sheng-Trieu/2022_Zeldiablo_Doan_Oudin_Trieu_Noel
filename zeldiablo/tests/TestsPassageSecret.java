@@ -14,19 +14,19 @@ public class TestsPassageSecret {
     public void testPassageSecret() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret.txt");
         assertEquals(false, laby.passageSecret.etreOuvert());
-        assertEquals(laby.passageSecret.getPos().getX(), 2);
-        assertEquals(laby.passageSecret.getPos().getY(), 1);
-        assertEquals(laby.boutonPassage.getPos().getX(), 3);
-        assertEquals(laby.boutonPassage.getPos().getY(), 4);
+        assertEquals(3, laby.passageSecret.getPos().getX());
+        assertEquals(2, laby.passageSecret.getPos().getY());
+        assertEquals(4, laby.boutonPassage.getPos().getX());
+        assertEquals(5, laby.boutonPassage.getPos().getY());
     }
 
     @Test
     public void testOuverturePassage() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret.txt");
         assertEquals(false, laby.passageSecret.etreOuvert());
-        laby.deplacerPerso("gauche");
-        assertEquals(laby.pj.getX(), 3);
-        assertEquals(laby.pj.getY(), 4);
+        laby.deplacerPerso("Gauche");
+        assertEquals(4,laby.pj.x);
+        assertEquals(5,laby.pj.y);
         assertEquals(true, laby.passageSecret.etreOuvert());
     }
 
