@@ -28,7 +28,7 @@ public class LabyDessin implements DessinJeu {
 
         for (int i = 0; i < ljeu.getMurs().length; i++) {
             for (int j = 0; j < ljeu.getMurs()[i].length; j++) {
-                if (ljeu.getMurs()[i][j] == true) {
+                if (ljeu.getMurs()[i][j]) {
                     creerRectangle(gc, i * TAILLE, j * TAILLE);
                 }
             }
@@ -42,6 +42,13 @@ public class LabyDessin implements DessinJeu {
                 gc.setFill(Color.VIOLET);
                 gc.fillOval(ljeu.getMonstre().get(i).getX() * TAILLE, ljeu.getMonstre().get(i).getY() * TAILLE, TAILLE, TAILLE);
             }
+        }
+
+        if (ljeu.getPassageSecret() != null){
+            gc.setFill(Color.GRAY);
+            gc.fillOval(ljeu.getPassageSecret().getPos().getX()*TAILLE, ljeu.getPassageSecret().getPos().getY()*TAILLE, TAILLE, TAILLE);
+            gc.setFill(Color.ORANGE);
+            gc.fillOval(ljeu.getBoutonPassage().getPos().getX()*TAILLE, ljeu.getBoutonPassage().getPos().getY()*TAILLE, TAILLE, TAILLE);
         }
     }
 

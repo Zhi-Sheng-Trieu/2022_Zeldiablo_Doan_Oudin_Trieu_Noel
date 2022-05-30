@@ -201,21 +201,32 @@ public class Labyrinthe {
 
     }
 
+
     public boolean deplacementPossible(int[] suivant) {
-        boolean possible = false;
-        for (int i = 0; i < this.monstre.size(); i++) {
-            if (!this.murs[suivant[0]][suivant[1]]
-                    && (this.monstre.get(i).getX() != suivant[0] || this.monstre.get(i).getY() != suivant[1])
-                    && this.passageSecret.etreOuvert()) {
-                possible = true;
+        boolean valide = false;
+        if (!this.murs[suivant[0]][suivant[1]]) {
+            valide = true;
+
+            if (this.passageSecret != null) {
+                valide = this.passageSecret.etreOuvert();
             }
-            else{
-                possible = false;
-                break;
+
+            if (this.monstre != null && valide) {
+                //parcours tous les monstres
+                for (int i = 0; i < this.monstre.size(); i++) {
+                    //test si la place est libre
+                    if (this.monstre.get(i).getX() != suivant[0] || this.monstre.get(i).getY() != suivant[1]) {
+                        valide = true;
+                    } else {
+                        valide = false;
+                        break;
+                    }
+                }
             }
         }
-        return possible;
+        return valide;
     }
+
 
 
     /**

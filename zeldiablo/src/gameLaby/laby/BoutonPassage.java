@@ -9,4 +9,8 @@ public class BoutonPassage {
         this.pos = p;
         this.passageSecret = ps;
     }
+
+    public Position getPos() {
+        return pos;
+    }
 }
