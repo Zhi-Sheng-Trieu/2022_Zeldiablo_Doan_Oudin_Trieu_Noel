@@ -19,9 +19,9 @@ activate main
     activate labyJeu
         main -> labyJeu : update(15.0, "Droite")
         labyJeu -> labyJeu : ajouterMonstre()
-        labyJeu -> labyJeu : deplacerMonstre()
         activate laby
             labyJeu -> laby : deplacerPerso()
+            labyJeu -> laby : deplacerMonstre()
             laby --> labyJeu
         deactivate laby
 
