@@ -92,7 +92,6 @@ public class LabyJeu implements Jeu {
      */
     @Override
     public void update(double secondes, Clavier clavier) {
-        this.compteur+=1;
         // On déplace le personnage selon les touches du perso
         if (clavier.droite){
             this.lab.deplacerPerso("Droite");
@@ -120,6 +119,7 @@ public class LabyJeu implements Jeu {
 
 
     public void genererMonstre(){
+        this.compteur+=1;
         if(this.compteur == 20 && this.monstre.size() <= this.limite){
             this.ajouterMonstre();
             this.compteur = 0;
