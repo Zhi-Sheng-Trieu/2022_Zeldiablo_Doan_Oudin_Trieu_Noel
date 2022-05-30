@@ -38,7 +38,7 @@ class PassageSecret {
 }
 
 class BoutonPassage {
-    +BoutonPassage(int dx, int dy)
+    +BoutonPassage(int dx, int dy, PassageSecret passage)
     +activerPassage() : void
     +getX() : int
     +getY() : int
