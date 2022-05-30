@@ -96,29 +96,35 @@ public class LabyJeu implements Jeu {
         // On déplace le personnage selon les touches du perso
         if (clavier.droite){
             this.lab.deplacerPerso("Droite");
+            genererMonstre();
         }
 
         if (clavier.gauche){
             this.lab.deplacerPerso("Gauche");
+            genererMonstre();
         }
 
         if (clavier.haut){
             this.lab.deplacerPerso("Haut");
+            genererMonstre();
         }
 
         if (clavier.bas){
             this.lab.deplacerPerso("Bas");
-        }
-
-        if(this.compteur == 20 && this.monstre.size() <= this.limite){
-            this.ajouterMonstre();
-            this.compteur = 0;
+            genererMonstre();
         }
 
         // On met a jour les position du perso
         this.personnage = this.lab.pj;
     }
 
+
+    public void genererMonstre(){
+        if(this.compteur == 20 && this.monstre.size() <= this.limite){
+            this.ajouterMonstre();
+            this.compteur = 0;
+        }
+    }
 
     /**
      * On initialise le laby
