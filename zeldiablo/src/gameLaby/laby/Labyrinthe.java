@@ -22,7 +22,8 @@ public class Labyrinthe {
     public static final char VIDE = '.';
     public static final char MONSTRE = 'M';
     public static final char PASSAGE = '#';
-    public static final char BOUTON = '*';
+    public static final char BOUTON = 'o';
+    public static final char BOUTONFERME = 'f';
 
     /**
      * constantes actions possibles
@@ -46,6 +47,7 @@ public class Labyrinthe {
      */
     public PassageSecret passageSecret;
     public BoutonPassage boutonPassage;
+    public BoutonFermeture boutonFermeture;
 
     /**
      * les murs du labyrinthe
@@ -119,6 +121,7 @@ public class Labyrinthe {
 
         Position pos_passage = null;
         Position pos_bouton = null;
+        Position pos_bouton_ferme = null;
         // parcours le fichier
         while (ligne != null) {
 
@@ -151,6 +154,10 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         pos_bouton = new Position(colonne, numeroLigne);
                         break;
+                    case BOUTONFERME:
+                        this.murs[colonne][numeroLigne] = false;
+                        pos_bouton_ferme = new Position(colonne, numeroLigne);
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
@@ -165,6 +172,7 @@ public class Labyrinthe {
         if (pos_passage != null) {
             this.passageSecret = new PassageSecret(pos_passage);
             this.boutonPassage = new BoutonPassage(pos_bouton, passageSecret);
+            this.boutonFermeture = new BoutonFermeture(pos_bouton_ferme, passageSecret);
         }
 
         // ferme fichier
@@ -193,6 +201,8 @@ public class Labyrinthe {
             // on vérifie si le perso est sur un bouton
             if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()){
                 boutonPassage.activerPassage();
+            }else if (this.pj.x == boutonFermeture.getPos().getX() && this.pj.y == boutonFermeture.getPos().getY()){
+                boutonFermeture.fermer();
             }
         }
 
