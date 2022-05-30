@@ -198,19 +198,23 @@ public class Labyrinthe {
             boutonPassage.activerPassage();
         }
 
+            if (this.deplacementPossible(suivante)) {
+                // on met a jour personnage
+                this.pj.x = suivante[0];
+                this.pj.y = suivante[1];
+            }
+
     }
 
 
     public boolean deplacementPossible(int[] suivant) {
-        boolean valide = false;
+        boolean valide = true;
         if (!this.murs[suivant[0]][suivant[1]]) {
-            valide = true;
-
             if (this.passageSecret != null) {
                 valide = this.passageSecret.etreOuvert();
             }
 
-            if (this.monstre != null && valide) {
+            if (this.monstre != null ) {
                 //parcours tous les monstres
                 for (int i = 0; i < this.monstre.size(); i++) {
                     //test si la place est libre
@@ -222,6 +226,9 @@ public class Labyrinthe {
                     }
                 }
             }
+        }
+        else{
+            valide = false;
         }
         return valide;
     }
