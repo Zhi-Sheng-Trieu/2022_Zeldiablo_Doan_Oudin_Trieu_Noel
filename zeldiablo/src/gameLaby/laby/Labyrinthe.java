@@ -186,7 +186,6 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur ou un monstre, on effectue le deplacement
-
         if (this.deplacementPossible(suivante)) {
             // on met a jour personnage
             this.pj.x = suivante[0];
@@ -198,6 +197,8 @@ public class Labyrinthe {
             boutonPassage.activerPassage();
         }
 
+        System.out.println(this.deplacementPossible(suivante));
+        System.out.println(boutonPassage.getPos().getX()+ " ; "+boutonPassage.getPos().getY());
     }
 
 
@@ -205,7 +206,9 @@ public class Labyrinthe {
         boolean valide = true;
         if (!this.murs[suivant[0]][suivant[1]]) {
             if (this.passageSecret != null) {
-                valide = this.passageSecret.etreOuvert();
+                if (pj.x == passageSecret.getPos().getX() && pj.y == passageSecret.getPos().getY()){
+                    valide = this.passageSecret.etreOuvert();
+                }
             }
 
             if (this.monstre != null ) {
