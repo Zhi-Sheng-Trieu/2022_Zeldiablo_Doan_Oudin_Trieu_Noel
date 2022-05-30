@@ -10,6 +10,10 @@ public class BoutonPassage {
         this.passageSecret = ps;
     }
 
+    public void activerPassage(){
+        this.passageSecret.ouvrirPassage();
+    }
+
     public Position getPos() {
         return pos;
     }
