@@ -195,7 +195,40 @@ public class Labyrinthe {
 
     }
 
+    /**
+     * Methode permettant de deplacer le monstre selon les deplacements du joueur
+     */
+    public void deplacerMonstre(Monstre m){
+        // On choisi un nombre au hasard
+        int aleaNb = (int)Math.round(Math.random()*3);
 
+        // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
+        switch (aleaNb){
+            case 0:
+                // Cas ou le monstre monte
+                m.getPos().setY(m.getY() + 1);
+                break;
+            case 1:
+                // Cas ou le monstre descend
+                m.getPos().setY(m.getY() - 1);
+                break;
+            case 2:
+                // Cas ou le monstre va a droite
+                m.getPos().setX(m.getX() + 1);
+                break;
+            case 3:
+                // Cas ou le monstre va a gauche
+                m.getPos().setX(m.getX() - 1);
+                break;
+        }
+    }
+
+
+    /**
+     * Methode permettant de savoir si la case suivante est dispo
+     * @param suivant la case a selectionner
+     * @return Si le deplacement est possible sur la case selectionnee
+     */
     public boolean deplacementPossible(int[] suivant) {
         boolean valide = true;
         if (!this.murs[suivant[0]][suivant[1]]) {
