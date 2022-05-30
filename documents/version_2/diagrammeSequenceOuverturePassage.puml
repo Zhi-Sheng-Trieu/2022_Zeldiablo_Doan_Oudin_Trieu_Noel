@@ -1,18 +1,16 @@
 @startuml
 participant "main" as main
 participant "laby: Labyrinthe" as laby
+participant "perso : Perso" as perso
 participant "bouton : BoutonPassage" as bouton
 participant "passageSecret : PassageSecret" as passageSecret
 
-create laby
 activate main
     activate laby
-        main -> laby : new
-        create passageSecret
-        laby -> passageSecret : new
-        create bouton
-        laby -> bouton : new
         main -> laby : deplacerPerso(Gauche)
+        activate perso
+        laby -> perso : memePositionPassageSecret()
+        perso --> laby : true
         activate bouton
         laby -> bouton : activerPassage()
         activate passageSecret

@@ -187,16 +187,15 @@ public class Labyrinthe {
 
         // si c'est pas un mur ou un monstre, on effectue le deplacement
 
-        for (int i = 0; i < this.monstre.size(); i++) {
+        if (this.deplacementPossible(suivante)) {
+            // on met a jour personnage
+            this.pj.x = suivante[0];
+            this.pj.y = suivante[1];
+        }
 
-            if (this.deplacementPossible(suivante)) {
-                // on met a jour personnage
-                this.pj.x = suivante[0];
-                this.pj.y = suivante[1];
-            } else {
-                break;
-            }
-
+        // on vérifie si le perso est sur un bouton
+        if (pj.x == boutonPassage.getPos().getX() && pj.y == boutonPassage.getPos().getY()){
+            boutonPassage.activerPassage();
         }
 
     }
