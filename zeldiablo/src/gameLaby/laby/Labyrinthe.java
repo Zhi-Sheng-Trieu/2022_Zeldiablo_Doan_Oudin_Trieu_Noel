@@ -198,12 +198,6 @@ public class Labyrinthe {
             boutonPassage.activerPassage();
         }
 
-            if (this.deplacementPossible(suivante)) {
-                // on met a jour personnage
-                this.pj.x = suivante[0];
-                this.pj.y = suivante[1];
-            }
-
     }
 
 
