@@ -33,15 +33,13 @@ class PassageSecret {
     +PassageSecret(int dx, int dy, BoutonPassage btn)
     +ouvrirPassage() : void
     +etreOuvert() : boolean
-    +getX() : int
-    +getY() : int
+    +getPos() : Position
 }
 
 class BoutonPassage {
     +BoutonPassage(int dx, int dy, PassageSecret passage)
     +activerPassage() : void
-    +getX() : int
-    +getY() : int
+    +getPos() : Position
 }
 
 class Position {
@@ -49,6 +47,8 @@ class Position {
     -y : int
     +getX() : int
     +getY() : int
+    +setX(int x) : void
+    +setY(int y) : void
 }
 
 class Monstre{
