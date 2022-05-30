@@ -190,12 +190,13 @@ public class Labyrinthe {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+            // on vérifie si le perso est sur un bouton
+            if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()){
+                boutonPassage.activerPassage();
+            }
         }
 
-        // on vérifie si le perso est sur un bouton
-        if (pj.x == boutonPassage.getPos().getX() && pj.y == boutonPassage.getPos().getY()){
-            boutonPassage.activerPassage();
-        }
+
 
         System.out.println(this.deplacementPossible(suivante));
         System.out.println(boutonPassage.getPos().getX()+ " ; "+boutonPassage.getPos().getY());
