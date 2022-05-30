@@ -207,25 +207,39 @@ public class Labyrinthe {
         // On choisi un nombre au hasard
         int aleaNb = (int)Math.round(Math.random()*3);
 
+        String action = "";
+
         // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
         switch (aleaNb){
             case 0:
-                // Cas ou le monstre monte
-                m.getPos().setY(m.getY() + 1);
+                action = "Haut";
                 break;
             case 1:
-                // Cas ou le monstre descend
-                m.getPos().setY(m.getY() - 1);
+                action = "Bas";
                 break;
             case 2:
-                // Cas ou le monstre va a droite
-                m.getPos().setX(m.getX() + 1);
+                action = "Droite";
                 break;
             case 3:
-                // Cas ou le monstre va a gauche
-                m.getPos().setX(m.getX() - 1);
+                action = "Gauche";
                 break;
         }
+
+        // case courante
+        int[] courante = {m.getX(), m.getY()};
+
+        // calcule case suivante
+        int[] suivante = getSuivant(courante[0], courante[1], action);
+
+        // si c'est pas un mur ou un monstre, on effectue le deplacement
+
+        if (this.deplacementPossible(suivante)) {
+            // on met a jour le monstre
+            m.getPos().setX(suivante[0]);
+            m.getPos().setY(suivante[1]);
+        }
+
+
     }
 
 
