@@ -68,8 +68,8 @@ public class LabyJeu implements Jeu {
     }
 
     public void ajouterMonstre(){
-        int x = (int)Math.round(Math.random()* (this.getLength()-1))+1;
-        int y = (int)Math.round(Math.random()* (this.getLengthY()-1))+1;
+        int x = (int)Math.round(Math.random()* (this.getLength()-1));
+        int y = (int)Math.round(Math.random()* (this.getLengthY()-1));
         boolean arret = false;
         while (!arret){
             for(int i = 0; i < monstre.size(); i ++){
