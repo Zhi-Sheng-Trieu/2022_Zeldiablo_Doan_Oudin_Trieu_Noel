@@ -193,9 +193,22 @@ public class Labyrinthe {
     }
 
     public boolean deplacementPossible(int[] suivant){
-        return !this.murs[suivant[0]][suivant[1]]
-                && (this.monstre.getX() != suivant[0] && this.monstre.getY() != suivant[1])
-                && this.passageSecret.etreOuvert();
+        boolean valide = false;
+        if (!this.murs[suivant[0]][suivant[1]]){
+            valide = true;
+            if (this.monstre != null){
+                if (this.monstre.getX() != suivant[0] && this.monstre.getY() != suivant[1]){
+                    valide = true;
+                }
+            }
+
+            if (this.passageSecret != null){
+                if (this.passageSecret.etreOuvert()){
+                    valide = true;
+                }
+            }
+        }
+        return valide;
     }
 
 

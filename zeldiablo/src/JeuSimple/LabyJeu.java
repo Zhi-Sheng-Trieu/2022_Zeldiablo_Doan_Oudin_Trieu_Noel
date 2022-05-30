@@ -1,6 +1,8 @@
 package JeuSimple;
 
+import gameLaby.laby.BoutonPassage;
 import gameLaby.laby.Labyrinthe;
+import gameLaby.laby.PassageSecret;
 import gameLaby.laby.Perso;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +30,9 @@ public class LabyJeu implements Jeu {
      * Liste des murs du laby
      */
     private boolean[][] murs;
+
+    private PassageSecret passageSecret;
+    private BoutonPassage boutonPassage;
     /**
      * Labyrinthe du jeu
      */
@@ -48,6 +53,8 @@ public class LabyJeu implements Jeu {
         this.murs = lab.murs;
         this.personnage = lab.pj;
         this.monstre = lab.monstre;
+        this.passageSecret = lab.passageSecret;
+        this.boutonPassage = lab.boutonPassage;
     }
 
 
@@ -140,5 +147,13 @@ public class LabyJeu implements Jeu {
      */
     public Perso getMonstre(){
         return this.monstre;
+    }
+
+    public PassageSecret getPassageSecret() {
+        return passageSecret;
+    }
+
+    public BoutonPassage getBoutonPassage() {
+        return boutonPassage;
     }
 }
