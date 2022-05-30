@@ -8,10 +8,10 @@ create laby
 activate main
     activate laby
         main -> laby : new
-        create bouton
-        laby -> bouton : new
         create passageSecret
         laby -> passageSecret : new
+        create bouton
+        laby -> bouton : new
         main -> laby : deplacerPerso(Gauche)
         activate bouton
         laby -> bouton : activerPassage()
