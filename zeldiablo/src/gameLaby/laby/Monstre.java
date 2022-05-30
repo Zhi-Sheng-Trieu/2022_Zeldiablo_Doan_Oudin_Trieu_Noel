@@ -51,5 +51,14 @@ public class Monstre {
         //getter
         return this.pos.getY();
     }
+
+    /**
+     * Get la position
+     * @return position
+     */
+    public Position getPos(){
+        return this.pos;
+    }
+
 }
 
