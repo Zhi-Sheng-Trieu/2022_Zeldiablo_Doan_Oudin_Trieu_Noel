@@ -24,5 +24,7 @@ public class MainLaby {
 
         MoteurJeu.launch(labyJeu, labyDessin);
 
+
+
     }
 }
