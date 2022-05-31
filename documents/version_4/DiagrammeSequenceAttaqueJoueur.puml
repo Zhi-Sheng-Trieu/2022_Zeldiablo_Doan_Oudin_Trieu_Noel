@@ -2,8 +2,10 @@
 participant "main" as main
 participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
-participant "labyDessin : LabyDessin" as labyDessin
-participant "laby : Labyrinthe" as laby
+participant "personnage : Perso" as personnage
+participant "monstre : Monstre" as monstre
+
+
 
 
 activate main
@@ -11,28 +13,24 @@ activate main
     moteur --> main
     main -> moteur : setFPS(fps)
     moteur --> main
-    create labyJeu
-    main -> labyJeu : new
-    create labyDessin
-    main -> labyDessin : new
+    main -> labyJeu : update(15, "Space")
 
     activate labyJeu
-        main -> labyJeu : update(15.0, "Droite")
-        labyJeu -> labyJeu : ajouterMonstre()
-        activate laby
-            labyJeu -> laby : deplacerPerso()
-            labyJeu -> laby : deplacerMonstre()
-            laby -> laby : getSuivant(courante[0], courante[1], action)
-            laby -> laby : deplacementPossible(suivante)
-            laby --> labyJeu
-        deactivate laby
+        activate personnage
+            labyJeu -> personnage : attaquer(Monstre m)
+            activate monstre
+                personnage -> monstre : etreMort()
+                monstre --> personnage
+            deactivate monstre
+            personnage --> labyJeu
+        deactivate personnage
 
-    labyJeu --> main
+        labyJeu --> main
     deactivate labyJeu
 
     main -> moteur : launch(labyJeu, labyDessin)
     activate moteur
-    moteur -> main
+    moteur --> main
     deactivate moteur
 
 deactivate main
