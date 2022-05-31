@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static JeuSimple.LabyDessin.TAILLE;
+
 /**
  * classe labyrinthe. represente un labyrinthe avec
  * <ul> des murs </ul>
@@ -202,7 +204,7 @@ public class Labyrinthe {
             this.pj.getPos().setY(suivante[1]);
             // on vérifie si le perso est sur un bouton
             if (boutonOuverture != null) {
-                if (this.pj.getPos().posEquals(this.boutonOuverture.getPos())) {
+                if (this.pj.etrePresent(boutonOuverture.getPos().getX(), boutonOuverture.getPos().getY())) {
                     this.boutonOuverture.activerPassage();
                 }
             }

@@ -1,9 +1,55 @@
 @startuml
 
+'package moteurJeu'
+interface DessinJeu{
+    dessinerJeu(Jeu jeu, Canvas canvas)
+}
+
+interface Jeu{
+    +update(double secondes, Clavier clavier)
+    +init()
+    +etreFini() : boolean
+}
+
+
+'package JeuSimple'
+class LabyDessin{
+    +{static}final int TAILLE
+    dessinerJeu(Jeu jeu, Canvas canvas)
+    creerRectangle(GraphicsContext gc, int x, int y)
+}
+
+LabyDessin ..|> DessinJeu
+
+class LabyJeu{
+    +{static} final int limite
+    -murs : boolean[][]
+    +LabyJeu(String nom)
+    +ajouterMonstre()
+    +genererMonstre()
+    +update(double secondes, Clavier clavier)
+    +init()
+    +etreFini()
+    +geters()
+}
+
+LabyJeu ..|> Jeu
+LabyJeu "1"->"1" Perso : -personnage
+LabyJeu "1"->"*" Monstre : -monstre
+LabyJeu "1"->"1" PassageSecret : -passageSecret
+LabyJeu "1"->"1" BoutonOuverture : -boutonOuverture
+LabyJeu "1"->"1" BoutonFermeture : -boutonFermeture
+LabyJeu "1"-->"1" Labyrinthe : -lab
+
+
+'package gameLaby'
 class Labyrinthe{
     {static} +MUR : char
     {static} +PJ : char
     {static} +VIDE : char
+    {static} +PASSAGE : char
+    {static} +BOUTON : char
+    {static} +BOUTONFERME : char
     {static} +HAUT : String
     {static} +BAS : String
     {static} +GAUCHE : String
