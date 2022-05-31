@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static JeuSimple.LabyDessin.TAILLE;
 
@@ -225,7 +226,8 @@ public class Labyrinthe {
      */
     public void deplacerMonstre(Monstre m){
         // On choisi un nombre au hasard
-        int aleaNb = (int)Math.round(Math.random()*3);
+        Random random = new Random();
+        int aleaNb = random.nextInt(4);
 
         String action = "";
 
