@@ -31,6 +31,10 @@ public abstract class Entitee {
         return (this.pos.getX() == dx && this.pos.getY() == dy);
     }
 
+    public void perdrePv(int degat){
+        this.pv-=degat;
+    }
+
     public abstract boolean attaquer(Entitee e);
 
     // ############################################
