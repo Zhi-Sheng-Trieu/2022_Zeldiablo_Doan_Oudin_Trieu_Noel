@@ -33,6 +33,16 @@ public class LabyDessin implements DessinJeu {
                 }
             }
         }
+        if (ljeu.getPassageSecret() != null){
+            if (ljeu.getPassageSecret().etreOuvert()){
+                gc.setFill(Color.GRAY);
+            }else {
+                gc.setFill(Color.BLACK);
+            }
+            gc.fillRect(ljeu.getPassageSecret().getPos().getX()*TAILLE, ljeu.getPassageSecret().getPos().getY()*TAILLE, TAILLE, TAILLE);
+            gc.setFill(Color.ORANGE);
+            gc.fillOval(ljeu.getBoutonPassage().getPos().getX()*TAILLE, ljeu.getBoutonPassage().getPos().getY()*TAILLE, TAILLE, TAILLE);
+        }
 
         gc.setFill(Color.RED);
         gc.fillOval(ljeu.getPj().getX() * TAILLE, ljeu.getPj().getY() * TAILLE, TAILLE, TAILLE);
@@ -44,12 +54,7 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
-        if (ljeu.getPassageSecret() != null){
-            gc.setFill(Color.GRAY);
-            gc.fillOval(ljeu.getPassageSecret().getPos().getX()*TAILLE, ljeu.getPassageSecret().getPos().getY()*TAILLE, TAILLE, TAILLE);
-            gc.setFill(Color.ORANGE);
-            gc.fillOval(ljeu.getBoutonPassage().getPos().getX()*TAILLE, ljeu.getBoutonPassage().getPos().getY()*TAILLE, TAILLE, TAILLE);
-        }
+
     }
 
     public void creerRectangle(GraphicsContext gc, int x, int y) {

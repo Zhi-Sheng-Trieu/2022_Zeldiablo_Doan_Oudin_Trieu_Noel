@@ -265,29 +265,34 @@ public class Labyrinthe {
      */
     public boolean deplacementPossible(int[] suivant) {
         boolean valide = true;
-        //on vérifie si on nen se déplace pas sur un mur
+        //on vérifie si on ne se déplace pas sur un mur
         if (!this.murs[suivant[0]][suivant[1]]) {
-            //s'il existe un passage secret, on vérifie si le passage secret est ouvert ou non
-            if (this.passageSecret != null) {
-                if (passageSecret.getPos().getX() == suivant[0] && passageSecret.getPos().getY() == suivant[1]){
-                    valide = this.passageSecret.etreOuvert();
-                }
+            // on vérifie si la position n'est pas la même que le personnage
+            if (this.pj.getX() == suivant[0] && this.pj.getY() == suivant[1]){
+                valide = false;
             }
-
-            if (this.monstre != null ) {
-                //parcours tous les monstres
-                for (Monstre value : this.monstre) {
-                    //test si la place est libre
-                    if (value.getX() != suivant[0] || value.getY() != suivant[1]) {
-                        valide = true;
-                    } else {
-                        valide = false;
-                        break;
+            else {
+                //s'il existe un passage secret, on vérifie si le passage secret est ouvert ou non
+                if (this.passageSecret != null) {
+                    if (passageSecret.getPos().getX() == suivant[0] && passageSecret.getPos().getY() == suivant[1]) {
+                        valide = this.passageSecret.etreOuvert();
+                    }
+                }
+                //s'il y a des monstres, on vérifie que le déplcement n'est pas sur un monstre
+                if (this.monstre != null) {
+                    //parcours tous les monstres
+                    for (Monstre value : this.monstre) {
+                        //test si la place est libre
+                        if (value.getX() == suivant[0] && value.getY() == suivant[1]){
+                            valide = false;
+                            break;
+                        }
                     }
                 }
             }
         }
         else{
+            //s'il y a un mur
             valide = false;
         }
         return valide;

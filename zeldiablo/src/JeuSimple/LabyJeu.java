@@ -45,9 +45,7 @@ public class LabyJeu implements Jeu {
     /**
      * Limite de monstre
      */
-    private static int limite = 5;
-
-
+    private static int limite = 2;
 
 
     /**
@@ -67,26 +65,27 @@ public class LabyJeu implements Jeu {
         this.compteur = 0;
     }
 
-    public void ajouterMonstre(){
-        int x;
-        int y;
+    public void ajouterMonstre() {
+        int x = 0;
+        int y = 0;
         boolean arret = false;
-        while (!arret){
-            x = (int)Math.round(Math.random()* (this.getLength()-1));
-            y = (int)Math.round(Math.random()* (this.getLengthY()-1));
-            if (monstre.isEmpty()){
+        while (!arret) {
+            x = (int) Math.round(Math.random() * (this.getLength() - 1));
+            y = (int) Math.round(Math.random() * (this.getLengthY() - 1));
+            if (monstre.isEmpty()) {
                 if (!this.murs[x][y] && (this.personnage.getX() != x || this.personnage.getY() != y)) {
-                    this.monstre.add(new Monstre(x,y));
                     arret = true;
                 }
             }
-            for(int i = 0; i < monstre.size(); i ++){
-                if(!this.murs[x][y] && (this.monstre.get(i).getX() != x || this.monstre.get(i).getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)){
-                    this.monstre.add(new Monstre(x,y));
-                    arret = true;
+            else {
+                for (Monstre value : monstre) {
+                    if (!this.murs[x][y] && (value.getX() != x || value.getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)) {
+                        arret = true;
+                    }
                 }
             }
         }
+        this.monstre.add(new Monstre(x, y));
     }
 
 
@@ -99,25 +98,25 @@ public class LabyJeu implements Jeu {
     @Override
     public void update(double secondes, Clavier clavier) {
         // On déplace le personnage selon les touches du perso
-        if (clavier.droite){
+        if (clavier.droite) {
             this.lab.deplacerPerso("Droite");
             deplacerM();
             genererMonstre();
         }
 
-        if (clavier.gauche){
+        if (clavier.gauche) {
             this.lab.deplacerPerso("Gauche");
             deplacerM();
             genererMonstre();
         }
 
-        if (clavier.haut){
+        if (clavier.haut) {
             this.lab.deplacerPerso("Haut");
             deplacerM();
             genererMonstre();
         }
 
-        if (clavier.bas){
+        if (clavier.bas) {
             this.lab.deplacerPerso("Bas");
             deplacerM();
             genererMonstre();
@@ -127,15 +126,15 @@ public class LabyJeu implements Jeu {
         this.personnage = this.lab.pj;
     }
 
-    public void deplacerM(){
+    public void deplacerM() {
         for (int i = 0; i < this.lab.monstre.size(); i++) {
             this.lab.deplacerMonstre(this.lab.monstre.get(i));
         }
     }
 
-    public void genererMonstre(){
-        this.compteur+=1;
-        if(this.compteur == 20 && this.monstre.size() <= limite){
+    public void genererMonstre() {
+        this.compteur += 1;
+        if (this.compteur == 20 && this.monstre.size() < limite) {
             this.ajouterMonstre();
             this.compteur = 0;
         }
@@ -196,9 +195,10 @@ public class LabyJeu implements Jeu {
 
     /**
      * Permet de recup le monstre
+     *
      * @return
      */
-    public ArrayList<Monstre> getMonstre(){
+    public ArrayList<Monstre> getMonstre() {
         return this.monstre;
     }
 
