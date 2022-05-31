@@ -22,6 +22,8 @@ activate main
         activate laby
             labyJeu -> laby : deplacerPerso()
             labyJeu -> laby : deplacerMonstre()
+            laby -> laby : getSuivant(courante[0], courante[1], action)
+            laby -> laby : deplacementPossible(suivante)
             laby --> labyJeu
         deactivate laby
 
