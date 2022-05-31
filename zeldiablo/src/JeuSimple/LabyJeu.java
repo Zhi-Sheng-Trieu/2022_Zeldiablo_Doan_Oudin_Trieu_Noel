@@ -76,10 +76,10 @@ public class LabyJeu implements Jeu {
                 if (!this.murs[x][y] && (this.personnage.getX() != x || this.personnage.getY() != y) && (passageSecret.getPos().getX() != x || passageSecret.getPos().getY() != y)) {
                     arret = true;
                 }
-            }
-            else {
+            } else {
                 for (Monstre value : monstre) {
-                    if (!this.murs[x][y] && (value.getX() != x || value.getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)&& (passageSecret.getPos().getX() != x || passageSecret.getPos().getY() != y)) {
+                    if (!this.murs[x][y] && (value.getX() != x || value.getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y) && (passageSecret.getPos().getX() != x || passageSecret.getPos().getY() != y)) {
+                        arret = true;
                     }
                 }
             }
