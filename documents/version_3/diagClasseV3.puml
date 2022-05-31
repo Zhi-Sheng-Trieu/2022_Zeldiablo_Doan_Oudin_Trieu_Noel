@@ -24,8 +24,13 @@ class Labyrinthe{
 class Perso {
     +Perso(int dx, int dy) : Perso
     +etrePresent(int dx, int dy) : boolean
-    +getX() : int
-    +getY() : int
+    +getPos() : Position
+}
+
+class Monstre{
+    +Monstre(int dx, int dy)
+    +etrePresent(int dx, int dy) : boolean
+    +getPos() : Position
 }
 
 class PassageSecret {
@@ -52,18 +57,16 @@ class BoutonFermeture {
 class Position {
     -x : int
     -y : int
+    +Position(int x, int y) : Position
     +getX() : int
     +getY() : int
     +setX(int x) : void
     +setY(int y) : void
+    +posEquals(Position pos) : boolean
+    +posEquals(int x, int y) : boolean
 }
 
-class Monstre{
-    +Monstre(int dx, int dy)
-    +etrePresent(int dx, int dy) : boolean
-    +getX() : int
-    +getY() : int
-}
+
 
 Labyrinthe "1"-->"1" Perso : +pj
 Labyrinthe "1"-->"1" Monstre : +monstre

@@ -9,7 +9,7 @@ public class Perso {
     /**
      * position du personnage
      */
-    public int x, y;
+    private Position pos;
 
     /**
      * constructeur
@@ -18,8 +18,7 @@ public class Perso {
      * @param dy position selon y
      */
     public Perso(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        this.pos = new Position(dx, dy);
     }
 
     /**
@@ -31,7 +30,7 @@ public class Perso {
      */
     public boolean etrePresent(int dx, int dy) {
 
-        return (this.x == dx && this.y == dy);
+        return (this.pos.getX() == dx && this.pos.getY() == dy);
     }
 
     // ############################################
@@ -39,18 +38,9 @@ public class Perso {
     // ############################################
 
     /**
-     * @return position x du personnage
+     * @return position du personnage
      */
-    public int getX() {
-        // getter
-        return this.x;
-    }
-
-    /**
-     * @return position y du personnage
-     */
-    public int getY() {
-        //getter
-        return this.y;
+    public Position getPos() {
+        return pos;
     }
 }

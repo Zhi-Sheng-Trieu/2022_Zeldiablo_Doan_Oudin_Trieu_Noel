@@ -192,24 +192,23 @@ public class Labyrinthe {
      */
     public void deplacerPerso(String action) {
         // case courante
-        int[] courante = {this.pj.x, this.pj.y};
+        int[] courante = {this.pj.getPos().getX(), this.pj.getPos().getY()};
 
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
         // si c'est pas un mur ou un monstre, on effectue le deplacement
         if (this.deplacementPossible(suivante)) {
             // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+            this.pj.getPos().posEquals(new Position(suivante[0], suivante[1]));
             // on vérifie si le perso est sur un bouton
             if (boutonPassage != null) {
-                if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()) {
-                    boutonPassage.activerPassage();
+                if (this.pj.getPos().posEquals(this.boutonPassage.getPos())) {
+                    this.boutonPassage.activerPassage();
                 }
             }
             if (boutonFermeture != null) {
-                if (this.pj.x == boutonFermeture.getPos().getX() && this.pj.y == boutonFermeture.getPos().getY()) {
-                    boutonFermeture.fermer();
+                if (this.pj.getPos().posEquals(this.boutonFermeture.getPos())) {
+                    this.boutonFermeture.fermer();
                 }
             }
             // deplace tous les monstres si le perso bouge
@@ -246,7 +245,7 @@ public class Labyrinthe {
         }
 
         // case courante
-        int[] courante = {m.getX(), m.getY()};
+        int[] courante = {m.getPos().getX(), m.getPos().getY()};
 
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
@@ -272,13 +271,13 @@ public class Labyrinthe {
         //on vérifie si on ne se déplace pas sur un mur
         if (!this.murs[suivant[0]][suivant[1]]) {
             // on vérifie si la position n'est pas la même que le personnage
-            if (this.pj.getX() == suivant[0] && this.pj.getY() == suivant[1]){
+            if (this.pj.getPos().posEquals(suivant[0], suivant[1])){
                 valide = false;
             }
             else {
                 //s'il existe un passage secret, on vérifie si le passage secret est ouvert ou non
                 if (this.passageSecret != null) {
-                    if (passageSecret.getPos().getX() == suivant[0] && passageSecret.getPos().getY() == suivant[1]) {
+                    if (this.passageSecret.getPos().posEquals(suivant[0], suivant[1])) {
                         valide = this.passageSecret.etreOuvert();
                     }
                 }
@@ -287,7 +286,7 @@ public class Labyrinthe {
                     //parcours tous les monstres
                     for (Monstre value : this.monstre) {
                         //test si la place est libre
-                        if (value.getX() == suivant[0] && value.getY() == suivant[1]){
+                        if (value.getPos().posEquals(suivant[0], suivant[1])) {
                             valide = false;
                             break;
                         }
@@ -350,14 +349,14 @@ public class Labyrinthe {
     public char getChar(int x, int y) {
         char valeurCase;
         //si la case contient le personnage
-        if (this.pj.getX() == x && this.pj.getY() == y) {
+        if (this.pj.getPos().posEquals(x, y)) {
             valeurCase = PJ;
         } else {
             //sinon si la case contient la sortie
-            if (this.passageSecret.getPos().getX() == x && this.passageSecret.getPos().getY() == y) {
+            if (this.passageSecret.getPos().posEquals(x, y)) {
                 valeurCase = PASSAGE;
             } else {
-                if (this.boutonPassage.getPos().getX() == x && this.boutonPassage.getPos().getY() == y){
+                if (this.boutonPassage.getPos().posEquals(x, y)) {
                     valeurCase = BOUTON;
                 } else {
                     //si la case est vide
