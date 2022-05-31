@@ -115,6 +115,25 @@ public class LabyJeu implements Jeu {
             genererMonstre();
         }
 
+        if(clavier.space){
+            for (int i = 0; i < monstre.size() ; i++) {
+                if((personnage.getPos().getX()+1 == monstre.get(i).getPos().getX() && personnage.getPos().getY() == monstre.get(i).getPos().getY())
+                        || (personnage.getPos().getX() == monstre.get(i).getPos().getX() && personnage.getPos().getY()+1 == monstre.get(i).getPos().getY())
+                        || (personnage.getPos().getX()-1 == monstre.get(i).getPos().getX() && personnage.getPos().getY() == monstre.get(i).getPos().getY())
+                        || (personnage.getPos().getX() == monstre.get(i).getPos().getX() && personnage.getPos().getY()-1 == monstre.get(i).getPos().getY())){
+                    if(personnage.attaquer(monstre.get(i))){
+                        monstre.remove(i);
+                    }
+                    else{
+                        this.lab.deplacerMonstre(monstre.get(i));
+                    }
+                }else{
+                    this.lab.deplacerMonstre(monstre.get(i));
+                }
+            }
+            genererMonstre();
+        }
+
         // On met a jour les position du perso
         this.personnage = this.lab.pj;
     }
