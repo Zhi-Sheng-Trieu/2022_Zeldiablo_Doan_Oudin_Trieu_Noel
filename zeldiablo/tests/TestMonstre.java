@@ -9,6 +9,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestMonstre {
+    /**
+     * Test permettant de verifier si un monstre est present ou non dans le labyrinthe
+     * Et qui permet de voir si il est immobile
+     * @throws IOException
+     */
     @Test
     public void test1_monstre_immobile() throws IOException {
 
@@ -21,7 +26,10 @@ public class TestMonstre {
         assertEquals(labyJeu.getMonstre().get(0).getY(), 3, "Les coordonnees ne sont pas les bonnes en Y");
     }
 
-
+    /**
+     * Test permettant de voir si le monstre bouge dans une position aleatoire lorsque le joueur bouge
+     * @throws IOException
+     */
     @Test
     public void test2_bougerMonstre() throws IOException {
         LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstre2.txt");
@@ -42,6 +50,10 @@ public class TestMonstre {
         assertEquals(labyJeu.getMonstre().get(0).etrePresent(x, y), false, "Le monstre aurait du changer d'emplacement");
     }
 
+    /**
+     * Test permettant de verifier la collision fonctionne
+     * @throws IOException
+     */
     @Test
     public void test3_ColisionMonstre() throws IOException {
         LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstreProcheJoueur.txt");
