@@ -1,4 +1,7 @@
 @startuml
+
+title Diagramme de sequence de l'attaque du héros
+
 participant "main" as main
 participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
