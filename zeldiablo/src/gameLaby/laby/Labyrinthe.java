@@ -199,7 +199,8 @@ public class Labyrinthe {
         // si c'est pas un mur ou un monstre, on effectue le deplacement
         if (this.deplacementPossible(suivante)) {
             // on met a jour personnage
-            this.pj.getPos().posEquals(new Position(suivante[0], suivante[1]));
+            this.pj.getPos().setX(suivante[0]);
+            this.pj.getPos().setY(suivante[1]);
             // on vérifie si le perso est sur un bouton
             if (boutonPassage != null) {
                 if (this.pj.etrePresent(boutonPassage.getPos().getX(), boutonPassage.getPos().getY())) {
