@@ -9,7 +9,7 @@ activate main
     activate laby
         main -> laby : deplacerPerso(Gauche)
         activate perso
-        laby -> perso : memePositionPassageSecret()
+        laby -> perso : etrePresent(boutonX : int, boutonY : int)
         perso --> laby : true
         activate bouton
         laby -> bouton : activerPassage()
