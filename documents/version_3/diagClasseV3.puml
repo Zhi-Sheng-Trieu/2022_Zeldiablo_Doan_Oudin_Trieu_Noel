@@ -13,6 +13,7 @@ class Labyrinthe{
     +Labyrinthe(String nomFichier) : Labyrinthe
     {static}+getSuivant(int x, int y, String action) : int[]
     +deplacerPerso(String action) : void
+    +deplacerMonstre(Monstre m) : void
     +deplacementPossible(int[] suivant) : boolean
     +etreFini() : boolean
     +getLenghtY() : int
@@ -67,7 +68,32 @@ class Position {
 }
 
 
+class LabyJeu{
+        -murs : boolean[][]
+        -compteur : int
+        -limite : int
+        +LabyJeu(String nom)
+        +ajoutMonstre() : void
+        +update(double seconde, Clavier clavier) : void
+        + genererMonstre() : void
+        +init() : void
+        +etreFini() : boolean
+        +getLenghtY() : int
+        +getLenght() : int
+        +getMur () : boolean[][]
+        +getPj() : Perso
+        +getMonstre() : ArrayList<Monstre>
+        +getPassageSecret () : PassageSecret
+        +getBoutonOuverture() : BoutonOuverture
+        +getBoutonFermeture() : BoutonFermeture
+}
 
+LabyJeu "1" -> "*" Labyrinthe : -lab
+LabyJeu "1" --> "1" boutonOuverture : -boutonOuverture
+LabyJeu "1" --> "1" PassageSecret : -passageSecret
+LabyJeu "1" --> "1" BoutonFermeture : -boutonFermeture
+LabyJeu "1" --> "1" Perso : -personnage
+LabyJeu "1" --> "*" Monstre : -monstre
 Labyrinthe "1"-->"1" Perso : +pj
 Labyrinthe "1"-->"1" Monstre : +monstre
 Labyrinthe "1"-->"1" PassageSecret : -passageSecret

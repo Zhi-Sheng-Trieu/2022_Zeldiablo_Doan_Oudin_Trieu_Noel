@@ -1,4 +1,7 @@
 @startuml
+
+title Diagramme de sequence de l'attaque du héros
+
 participant "main" as main
 participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
@@ -18,7 +21,9 @@ activate main
     activate labyJeu
         activate personnage
             labyJeu -> personnage : attaquer(Monstre m)
+            labyJeu -> labyJeu : genererMonstre()
             activate monstre
+                personnage -> monstre : perdrePv(int pv)
                 personnage -> monstre : etreMort()
                 monstre --> personnage
             deactivate monstre
