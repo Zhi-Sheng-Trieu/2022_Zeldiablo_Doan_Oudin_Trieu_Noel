@@ -23,6 +23,7 @@ activate main
             labyJeu -> personnage : attaquer(Monstre m)
             labyJeu -> labyJeu : genererMonstre()
             activate monstre
+                personnage -> monstre : perdrePv(int pv)
                 personnage -> monstre : etreMort()
                 monstre --> personnage
             deactivate monstre
