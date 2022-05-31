@@ -122,7 +122,7 @@ public class LabyJeu implements Jeu {
 
     public void genererMonstre() {
         this.compteur += 1;
-        if (this.compteur == 20 && this.monstre.size() < limite) {
+        if (this.compteur >= 20 && this.monstre.size() < limite) {
             this.ajouterMonstre();
             this.compteur = 0;
         }
