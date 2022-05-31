@@ -202,7 +202,7 @@ public class Labyrinthe {
             this.pj.getPos().posEquals(new Position(suivante[0], suivante[1]));
             // on vérifie si le perso est sur un bouton
             if (boutonPassage != null) {
-                if (this.pj.getPos().posEquals(this.boutonPassage.getPos())) {
+                if (this.pj.etrePresent(boutonPassage.getPos().getX(), boutonPassage.getPos().getY())) {
                     this.boutonPassage.activerPassage();
                 }
             }
