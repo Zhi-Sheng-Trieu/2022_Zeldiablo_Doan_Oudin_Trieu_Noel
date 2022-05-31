@@ -68,18 +68,24 @@ public class LabyJeu implements Jeu {
     }
 
     public void ajouterMonstre(){
-        int x = (int)Math.round(Math.random()* (this.getLength()-1));
-        int y = (int)Math.round(Math.random()* (this.getLengthY()-1));
+        int x;
+        int y;
         boolean arret = false;
         while (!arret){
+            x = (int)Math.round(Math.random()* (this.getLength()-1));
+            y = (int)Math.round(Math.random()* (this.getLengthY()-1));
+            if (monstre.isEmpty()){
+                if (!this.murs[x][y] && (this.personnage.getX() != x || this.personnage.getY() != y)) {
+                    this.monstre.add(new Monstre(x,y));
+                    arret = true;
+                }
+            }
             for(int i = 0; i < monstre.size(); i ++){
                 if(!this.murs[x][y] && (this.monstre.get(i).getX() != x || this.monstre.get(i).getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)){
                     this.monstre.add(new Monstre(x,y));
                     arret = true;
                 }
             }
-            x = (int)Math.round(Math.random()* (this.getLength()-1));
-            y = (int)Math.round(Math.random()* (this.getLengthY()-1));
         }
     }
 
@@ -129,7 +135,7 @@ public class LabyJeu implements Jeu {
 
     public void genererMonstre(){
         this.compteur+=1;
-        if(this.compteur == 20 && this.monstre.size() <= this.limite){
+        if(this.compteur == 20 && this.monstre.size() <= limite){
             this.ajouterMonstre();
             this.compteur = 0;
         }

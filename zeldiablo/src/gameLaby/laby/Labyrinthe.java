@@ -184,21 +184,17 @@ public class Labyrinthe {
 
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
-
         // si c'est pas un mur ou un monstre, on effectue le deplacement
         if (this.deplacementPossible(suivante)) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+            // on vérifie si le perso est sur un bouton
+            if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()){
+                boutonPassage.activerPassage();
+            }
         }
 
-        // on vérifie si le perso est sur un bouton
-        if (pj.x == boutonPassage.getPos().getX() && pj.y == boutonPassage.getPos().getY()){
-            boutonPassage.activerPassage();
-        }
-
-        System.out.println(this.deplacementPossible(suivante));
-        System.out.println(boutonPassage.getPos().getX()+ " ; "+boutonPassage.getPos().getY());
     }
 
     /**
@@ -208,25 +204,38 @@ public class Labyrinthe {
         // On choisi un nombre au hasard
         int aleaNb = (int)Math.round(Math.random()*3);
 
+        String action = "";
+
         // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
         switch (aleaNb){
             case 0:
-                // Cas ou le monstre monte
-                m.getPos().setY(m.getY() + 1);
+                action = "Haut";
                 break;
             case 1:
-                // Cas ou le monstre descend
-                m.getPos().setY(m.getY() - 1);
+                action = "Bas";
                 break;
             case 2:
-                // Cas ou le monstre va a droite
-                m.getPos().setX(m.getX() + 1);
+                action = "Droite";
                 break;
             case 3:
-                // Cas ou le monstre va a gauche
-                m.getPos().setX(m.getX() - 1);
+                action = "Gauche";
                 break;
         }
+
+        // case courante
+        int[] courante = {m.getX(), m.getY()};
+
+        // calcule case suivante
+        int[] suivante = getSuivant(courante[0], courante[1], action);
+
+        // si c'est pas un mur ou un monstre, on effectue le deplacement
+
+        if (this.deplacementPossible(suivante)) {
+            // on met a jour le monstre
+            m.getPos().setX(suivante[0]);
+            m.getPos().setY(suivante[1]);
+        }
+
     }
 
 
@@ -239,16 +248,16 @@ public class Labyrinthe {
         boolean valide = true;
         if (!this.murs[suivant[0]][suivant[1]]) {
             if (this.passageSecret != null) {
-                if (pj.x == passageSecret.getPos().getX() && pj.y == passageSecret.getPos().getY()){
+                if (passageSecret.getPos().getX() == suivant[0] && passageSecret.getPos().getY() == suivant[1]){
                     valide = this.passageSecret.etreOuvert();
                 }
             }
 
             if (this.monstre != null ) {
                 //parcours tous les monstres
-                for (int i = 0; i < this.monstre.size(); i++) {
+                for (Monstre value : this.monstre) {
                     //test si la place est libre
-                    if (this.monstre.get(i).getX() != suivant[0] || this.monstre.get(i).getY() != suivant[1]) {
+                    if (value.getX() != suivant[0] || value.getY() != suivant[1]) {
                         valide = true;
                     } else {
                         valide = false;
@@ -306,5 +315,47 @@ public class Labyrinthe {
     public boolean getMur(int x, int y) {
         // utilise le tableau de boolean
         return this.murs[x][y];
+    }
+
+    public char getChar(int x, int y) {
+        char valeurCase;
+        //si la case contient le personnage
+        if (this.pj.getX() == x && this.pj.getY() == y) {
+            valeurCase = PJ;
+        } else {
+            //sinon si la case contient la sortie
+            if (this.passageSecret.getPos().getX() == x && this.passageSecret.getPos().getY() == y) {
+                valeurCase = PASSAGE;
+            } else {
+                if (this.boutonPassage.getPos().getX() == x && this.boutonPassage.getPos().getY() == y){
+                    valeurCase = BOUTON;
+                } else {
+                    //si la case est vide
+                    if (this.murs[x][y] == false) {
+                        valeurCase = VIDE;
+                    }
+                    //sinon la case est un mur
+                    else {
+                        valeurCase = MUR;
+                    }
+                }
+            }
+        }
+        return valeurCase;
+    }
+
+    public String toString() {
+
+        String res = "";
+
+        res += murs.length+"\n";
+        res += murs[0].length+"\n";
+        for (int i = 0; i < murs[0].length; i++) {
+            for (int j = 0; j < murs.length; j++) {
+                res += getChar(j, i);
+            }
+            res += "\n";
+        }
+        return res;
     }
 }

@@ -11,7 +11,7 @@ public class MainLaby {
 
     public static void main(String[] args) throws IOException {
 
-        LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstre2.txt");
+        LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyPassageSecret1.txt");
         LabyDessin labyDessin = new LabyDessin();
 
         int width = labyJeu.getLength()*LabyDessin.TAILLE;

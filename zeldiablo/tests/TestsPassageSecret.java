@@ -30,7 +30,14 @@ public class TestsPassageSecret {
         assertEquals(true, laby.passageSecret.etreOuvert());
     }
 
-
-
-
+    /**
+     * Test de la méthode déplacer perso si le passage est fermé
+     */
+    @Test
+    public void testPassageFerme_deplacement() throws IOException {
+        Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret1.txt");
+        laby.deplacerPerso("Gauche");
+        assertEquals(5, laby.pj.x);
+        assertEquals(5, laby.pj.y);
+    }
 }
