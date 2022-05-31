@@ -82,7 +82,7 @@ public class Clavier {
         }
     }
 
-
+    //setter pour les tests
     public void setHaut(boolean haut) {
         this.haut = haut;
     }
