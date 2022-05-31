@@ -15,4 +15,9 @@ public class Perso extends Entitee{
     public Perso(int dx, int dy,int pv) {
         super(dx,dy,pv);
     }
+
+    @Override
+    public boolean attaquer(Entitee e) {
+        return false;
+    }
 }

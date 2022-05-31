@@ -12,5 +12,10 @@ public class Monstre extends Entitee{
         super(dx,dy);
     }
 
+    @Override
+    public boolean attaquer(Entitee e) {
+        return false;
+    }
+
 }
 

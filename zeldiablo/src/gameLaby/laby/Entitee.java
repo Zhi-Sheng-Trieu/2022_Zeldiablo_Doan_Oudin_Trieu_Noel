@@ -31,6 +31,8 @@ public abstract class Entitee {
         return (this.pos.getX() == dx && this.pos.getY() == dy);
     }
 
+    public abstract boolean attaquer(Entitee e);
+
     // ############################################
     // GETTER
     // ############################################
