@@ -1,4 +1,5 @@
-Déplacement aléatoire des monstres : DOAN Lancelot, OUDIN Clement
+Déplacement aléatoire des monstres et colision avec les monstres : DOAN Lancelot, OUDIN Clement
+
 Fermeture de Passage : Noel Alexandre, Trieu Zhi-Sheng
 
 
