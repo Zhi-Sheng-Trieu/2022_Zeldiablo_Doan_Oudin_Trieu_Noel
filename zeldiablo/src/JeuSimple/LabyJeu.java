@@ -45,7 +45,7 @@ public class LabyJeu implements Jeu {
     /**
      * Limite de monstre
      */
-    private static int limite = 5;
+    private static int limite = 2;
 
 
     /**
@@ -138,7 +138,6 @@ public class LabyJeu implements Jeu {
             this.ajouterMonstre();
             this.compteur = 0;
         }
-        System.out.println(monstre.size());
     }
 
     /**
