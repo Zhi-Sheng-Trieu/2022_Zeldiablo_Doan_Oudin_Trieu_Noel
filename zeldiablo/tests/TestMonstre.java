@@ -41,4 +41,31 @@ public class TestMonstre {
         labyJeu.update(15, clavier);
         assertEquals(labyJeu.getMonstre().get(0).etrePresent(x, y), false, "Le monstre aurait du changer d'emplacement");
     }
+
+    @Test
+    public void test3_ColisionMonstre() throws IOException {
+        LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstreProcheJoueur.txt");
+        Clavier clavier = new Clavier();
+        clavier.setDroite(true);
+        // On regarde si le monstre positionné par défaut sur la map est présent dans la liste
+        assertEquals(1, labyJeu.getMonstre().size(), "Le monstre n est pas present dans la liste");
+        // On regarde si les coordonnées du monstre sont les bonnes
+        assertEquals(6, labyJeu.getMonstre().get(0).getX(), "Les coordonnees ne sont pas les bonnes en X");
+        assertEquals(5, labyJeu.getMonstre().get(0).getY(), "Les coordonnees ne sont pas les bonnes en Y");
+
+        // On stocke les coordonnees du joueur
+        int x = labyJeu.getPj().getX();
+        int y = labyJeu.getPj().getY();
+
+
+        // On fait bouger le perso pour faire bouger le monstre
+        labyJeu.update(15, clavier);
+        // On verifie si le monstre n a pas bougé
+        assertEquals(6, labyJeu.getMonstre().get(0).getX(), "Le monstre n aurait pas du bouger");
+        assertEquals(5, labyJeu.getMonstre().get(0).getY(), "Le monstre n aurait pas du bouger");
+        // On verifie si le joueur n a pas bougé
+        assertEquals(labyJeu.getPj().getX(), x, "Le joueur n aurait pas du bouger");
+        assertEquals(labyJeu.getPj().getY(), y, "Le joueur n aurait pas du bouger");
+
+    }
 }
