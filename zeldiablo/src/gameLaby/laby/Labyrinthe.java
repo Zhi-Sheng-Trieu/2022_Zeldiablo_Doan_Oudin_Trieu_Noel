@@ -212,6 +212,10 @@ public class Labyrinthe {
                     boutonFermeture.fermer();
                 }
             }
+            // deplace tous les monstres si le perso bouge
+            for (Monstre value : monstre) {
+                deplacerMonstre(value);
+            }
         }
 
     }

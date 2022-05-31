@@ -100,25 +100,21 @@ public class LabyJeu implements Jeu {
         // On déplace le personnage selon les touches du perso
         if (clavier.droite) {
             this.lab.deplacerPerso("Droite");
-            deplacerM();
             genererMonstre();
         }
 
         if (clavier.gauche) {
             this.lab.deplacerPerso("Gauche");
-            deplacerM();
             genererMonstre();
         }
 
         if (clavier.haut) {
             this.lab.deplacerPerso("Haut");
-            deplacerM();
             genererMonstre();
         }
 
         if (clavier.bas) {
             this.lab.deplacerPerso("Bas");
-            deplacerM();
             genererMonstre();
         }
 
@@ -126,11 +122,6 @@ public class LabyJeu implements Jeu {
         this.personnage = this.lab.pj;
     }
 
-    public void deplacerM() {
-        for (int i = 0; i < this.lab.monstre.size(); i++) {
-            this.lab.deplacerMonstre(this.lab.monstre.get(i));
-        }
-    }
 
     public void genererMonstre() {
         this.compteur += 1;
