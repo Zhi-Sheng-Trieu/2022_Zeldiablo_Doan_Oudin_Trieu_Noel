@@ -25,8 +25,8 @@ public class TestsPassageSecret {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret.txt");
         assertEquals(false, laby.passageSecret.etreOuvert());
         laby.deplacerPerso("Gauche");
-        assertEquals(4,laby.pj.x);
-        assertEquals(5,laby.pj.y);
+        assertEquals(4,laby.pj.getPos().getX());
+        assertEquals(5,laby.pj.getPos().getX());
         assertEquals(true, laby.passageSecret.etreOuvert());
     }
 
@@ -37,7 +37,7 @@ public class TestsPassageSecret {
     public void testPassageFerme_deplacement() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret1.txt");
         laby.deplacerPerso("Gauche");
-        assertEquals(5, laby.pj.x);
-        assertEquals(5, laby.pj.y);
+        assertEquals(5, laby.pj.getPos().getX());
+        assertEquals(5, laby.pj.getPos().getX());
     }
 }
