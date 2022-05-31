@@ -137,7 +137,7 @@ public class Labyrinthe {
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne);
+                        this.pj = new Perso(colonne, numeroLigne,10);
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
