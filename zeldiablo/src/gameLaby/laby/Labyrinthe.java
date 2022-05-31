@@ -361,7 +361,7 @@ public class Labyrinthe {
                     valeurCase = BOUTON;
                 } else {
                     //si la case est vide
-                    if (this.murs[x][y] == false) {
+                    if (!this.murs[x][y]) {
                         valeurCase = VIDE;
                     }
                     //sinon la case est un mur
