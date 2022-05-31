@@ -21,6 +21,7 @@ activate main
     activate labyJeu
         activate personnage
             labyJeu -> personnage : attaquer(Monstre m)
+            labyJeu -> labyJeu : genererMonstre()
             activate monstre
                 personnage -> monstre : etreMort()
                 monstre --> personnage
