@@ -2,7 +2,7 @@ package gameLaby.laby;
 
 public abstract class Entitee {
 
-    private static final int DEGAT = 1;
+    public static final int DEGAT = 1;
     private int pv;
     /**
      * position de l'entitee
@@ -27,8 +27,11 @@ public abstract class Entitee {
      * @return true si le personnage est bien en (dx,dy)
      */
     public boolean etrePresent(int dx, int dy) {
-
         return (this.pos.getX() == dx && this.pos.getY() == dy);
+    }
+
+    public boolean etreMort(){
+        return pv <= 0;
     }
 
     public void perdrePv(int degat){

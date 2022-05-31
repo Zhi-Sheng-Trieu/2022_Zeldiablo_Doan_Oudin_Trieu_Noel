@@ -18,6 +18,7 @@ public class Perso extends Entitee{
 
     @Override
     public boolean attaquer(Entitee e) {
-        return false;
+        e.perdrePv(Entitee.DEGAT);
+        return e.etreMort();
     }
 }
