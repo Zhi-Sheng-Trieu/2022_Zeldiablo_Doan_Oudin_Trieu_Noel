@@ -81,4 +81,21 @@ public class Clavier {
 
         }
     }
+
+
+    public void setHaut(boolean haut) {
+        this.haut = haut;
+    }
+
+    public void setBas(boolean bas) {
+        this.bas = bas;
+    }
+
+    public void setDroite(boolean droite) {
+        this.droite = droite;
+    }
+
+    public void setGauche(boolean gauche) {
+        this.gauche = gauche;
+    }
 }
