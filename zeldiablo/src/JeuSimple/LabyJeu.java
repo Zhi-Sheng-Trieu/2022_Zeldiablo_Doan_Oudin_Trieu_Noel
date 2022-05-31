@@ -1,10 +1,6 @@
 package JeuSimple;
 
-import gameLaby.laby.BoutonPassage;
-import gameLaby.laby.Labyrinthe;
-import gameLaby.laby.PassageSecret;
-import gameLaby.laby.Monstre;
-import gameLaby.laby.Perso;
+import gameLaby.laby.*;
 import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
@@ -31,7 +27,8 @@ public class LabyJeu implements Jeu {
     private boolean[][] murs;
 
     private PassageSecret passageSecret;
-    private BoutonPassage boutonPassage;
+    private BoutonOuverture boutonOuverture;
+    private BoutonFermeture boutonFermeture;
     /**
      * Labyrinthe du jeu
      */
@@ -61,7 +58,8 @@ public class LabyJeu implements Jeu {
         this.personnage = lab.pj;
         this.monstre = lab.monstre;
         this.passageSecret = lab.passageSecret;
-        this.boutonPassage = lab.boutonPassage;
+        this.boutonOuverture = lab.boutonOuverture;
+        this.boutonFermeture = lab.boutonFermeture;
         this.compteur = 0;
     }
 
@@ -196,7 +194,11 @@ public class LabyJeu implements Jeu {
         return passageSecret;
     }
 
-    public BoutonPassage getBoutonPassage() {
-        return boutonPassage;
+    public BoutonOuverture getBoutonOuverture() {
+        return this.boutonOuverture;
+    }
+
+    public BoutonFermeture getBoutonFermeture() {
+        return this.boutonFermeture;
     }
 }

@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static JeuSimple.LabyDessin.TAILLE;
-
 /**
  * classe labyrinthe. represente un labyrinthe avec
  * <ul> des murs </ul>
@@ -46,7 +44,7 @@ public class Labyrinthe {
      * attribut du passage secret
      */
     public PassageSecret passageSecret;
-    public BoutonPassage boutonPassage;
+    public BoutonOuverture boutonOuverture;
     public BoutonFermeture boutonFermeture;
 
     /**
@@ -110,7 +108,7 @@ public class Labyrinthe {
         this.pj = null;
         this.monstre = new ArrayList<Monstre>();
         this.passageSecret = null;
-        this.boutonPassage = null;
+        this.boutonOuverture = null;
 
 
         // lecture des cases
@@ -173,7 +171,7 @@ public class Labyrinthe {
             this.passageSecret = new PassageSecret(pos_passage);
         }
         if (pos_bouton != null) {
-            this.boutonPassage = new BoutonPassage(pos_bouton, passageSecret);
+            this.boutonOuverture = new BoutonOuverture(pos_bouton, passageSecret);
         }
         if (pos_bouton_ferme != null) {
             this.boutonFermeture = new BoutonFermeture(pos_bouton_ferme, passageSecret);
@@ -202,9 +200,9 @@ public class Labyrinthe {
             this.pj.getPos().setX(suivante[0]);
             this.pj.getPos().setY(suivante[1]);
             // on vérifie si le perso est sur un bouton
-            if (boutonPassage != null) {
-                if (this.pj.getPos().posEquals(this.boutonPassage.getPos())) {
-                    this.boutonPassage.activerPassage();
+            if (boutonOuverture != null) {
+                if (this.pj.getPos().posEquals(this.boutonOuverture.getPos())) {
+                    this.boutonOuverture.activerPassage();
                 }
             }
             if (boutonFermeture != null) {
@@ -357,7 +355,7 @@ public class Labyrinthe {
             if (this.passageSecret.getPos().posEquals(x, y)) {
                 valeurCase = PASSAGE;
             } else {
-                if (this.boutonPassage.getPos().posEquals(x, y)) {
+                if (this.boutonOuverture.getPos().posEquals(x, y)) {
                     valeurCase = BOUTON;
                 } else {
                     //si la case est vide
