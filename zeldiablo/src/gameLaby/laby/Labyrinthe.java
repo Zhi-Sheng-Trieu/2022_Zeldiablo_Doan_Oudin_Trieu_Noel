@@ -169,9 +169,13 @@ public class Labyrinthe {
             numeroLigne++;
         }
         //si on a trouvé un passage secret dans le fichier texte
-        if (pos_passage != null) {
+        if (pos_passage != null){
             this.passageSecret = new PassageSecret(pos_passage);
+        }
+        if (pos_bouton != null) {
             this.boutonPassage = new BoutonPassage(pos_bouton, passageSecret);
+        }
+        if (pos_bouton_ferme != null) {
             this.boutonFermeture = new BoutonFermeture(pos_bouton_ferme, passageSecret);
         }
 
@@ -198,10 +202,15 @@ public class Labyrinthe {
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
             // on vérifie si le perso est sur un bouton
-            if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()){
-                boutonPassage.activerPassage();
-            }else if (this.pj.x == boutonFermeture.getPos().getX() && this.pj.y == boutonFermeture.getPos().getY()){
-                boutonFermeture.fermer();
+            if (boutonPassage != null) {
+                if (this.pj.x == boutonPassage.getPos().getX() && this.pj.y == boutonPassage.getPos().getY()) {
+                    boutonPassage.activerPassage();
+                }
+            }
+            if (boutonFermeture != null) {
+                if (this.pj.x == boutonFermeture.getPos().getX() && this.pj.y == boutonFermeture.getPos().getY()) {
+                    boutonFermeture.fermer();
+                }
             }
         }
 
@@ -256,7 +265,9 @@ public class Labyrinthe {
      */
     public boolean deplacementPossible(int[] suivant) {
         boolean valide = true;
+        //on vérifie si on nen se déplace pas sur un mur
         if (!this.murs[suivant[0]][suivant[1]]) {
+            //s'il existe un passage secret, on vérifie si le passage secret est ouvert ou non
             if (this.passageSecret != null) {
                 if (passageSecret.getPos().getX() == suivant[0] && passageSecret.getPos().getY() == suivant[1]){
                     valide = this.passageSecret.etreOuvert();
