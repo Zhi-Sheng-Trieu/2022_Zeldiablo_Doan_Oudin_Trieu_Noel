@@ -1,0 +1,85 @@
+@startuml
+
+class Labyrinthe{
+    {static} +MUR : char
+    {static} +PJ : char
+    {static} +VIDE : char
+    {static} +HAUT : String
+    {static} +BAS : String
+    {static} +GAUCHE : String
+    {static} +DROITE : String
+    +murs : boolean[][]
+
+    +Labyrinthe(String nomFichier) : Labyrinthe
+    {static}+getSuivant(int x, int y, String action) : int[]
+    +deplacerPerso(String action) : void
+    +deplacementPossible(int[] suivant) : boolean
+    +etreFini() : boolean
+    +getLenghtY() : int
+    +getLenght() : int
+    +getMur(int x, int y) : boolean
+
+
+}
+class Perso {
+    +Perso(int dx, int dy) : Perso
+    +etrePresent(int dx, int dy) : boolean
+    +getPos() : Position
+}
+
+class Monstre{
+    +Monstre(int dx, int dy)
+    +etrePresent(int dx, int dy) : boolean
+    +getPos() : Position
+}
+
+class PassageSecret {
+    -ouvert : boolean
+    +PassageSecret(int dx, int dy, BoutonOuverture btn)
+    +ouvrirPassage() : void
+    +fermerPassage() : void
+    +etreOuvert() : boolean
+    +getPos() : Position
+}
+
+class BoutonOuverture {
+    +BoutonOuverture(int dx, int dy, PassageSecret passage)
+    +activerPassage() : void
+    +getPos() : Position
+}
+
+class BoutonFermeture {
+    +BoutonFermeture(int dx, int dy, PassageSecret passage)
+    +fermer() : void
+    +getPos() : Position
+}
+
+class Position {
+    -x : int
+    -y : int
+    +Position(int x, int y) : Position
+    +getX() : int
+    +getY() : int
+    +setX(int x) : void
+    +setY(int y) : void
+    +posEquals(Position pos) : boolean
+    +posEquals(int x, int y) : boolean
+}
+
+
+
+Labyrinthe "1"-->"1" Perso : +pj
+Labyrinthe "1"-->"1" Monstre : +monstre
+Labyrinthe "1"-->"1" PassageSecret : -passageSecret
+Labyrinthe "1"-->"1" BoutonOuverture : -bouton
+Labyrinthe "1"-->"1" BoutonFermeture : -boutonFermeture
+BoutonOuverture "1"-->"1" PassageSecret : +passageSecret
+BoutonFermeture "1"-->"1" PassageSecret : +passageSecret
+BoutonFermeture "1"-->"1" Position : -pos
+Perso "1"-->"1" Position : -pos
+Monstre "1"-->"1" Position : -pos
+PassageSecret "1"-->"1" Position : -pos
+BoutonOuverture "1"-->"1" Position : -pos
+
+
+@enduml
