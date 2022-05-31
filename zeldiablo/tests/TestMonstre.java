@@ -26,7 +26,7 @@ public class TestMonstre {
     public void test2_bougerMonstre() throws IOException {
         LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstre2.txt");
         Clavier clavier = new Clavier();
-
+        clavier.setDroite(true);
         // On regarde si le monstre positionné par défaut sur la map est présent dans la liste
         assertEquals(1, labyJeu.getMonstre().size(), "Le monstre n est pas present dans la liste");
         // On regarde si les coordonnées du monstre sont les bonnes
@@ -39,6 +39,6 @@ public class TestMonstre {
 
         // On fait bouger le perso pour faire bouger le monstre
         labyJeu.update(15, clavier);
-        assertEquals(labyJeu.getMonstre().get(0).etrePresent(labyJeu.getMonstre().get(0).getX(), labyJeu.getMonstre().get(0).getY()), false, "Le monstre aurait du changer d'emplacement");
+        assertEquals(labyJeu.getMonstre().get(0).etrePresent(x, y), false, "Le monstre aurait du changer d'emplacement");
     }
 }
