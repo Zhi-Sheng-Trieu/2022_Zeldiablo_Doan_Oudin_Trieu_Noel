@@ -25,4 +25,8 @@ public class PassageSecret {
     public Position getPos() {
         return pos;
     }
+
+    public void fermerPassage() {
+        this.ouvert = false;
+    }
 }
