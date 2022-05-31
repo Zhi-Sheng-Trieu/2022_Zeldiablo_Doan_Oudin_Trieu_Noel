@@ -25,4 +25,13 @@ public class Position {
         this.y = y;
     }
 
+    public boolean posEquals(Position p){
+        return (this.x == p.getX() && this.y == p.getY());
+    }
+    public boolean posEquals(int x, int y){
+        return (this.x == x && this.y == y);
+    }
+
+
+
 }

@@ -36,21 +36,6 @@ public class Monstre {
     // GETTER
     // ############################################
 
-    /**
-     * @return position x du monstre
-     */
-    public int getX() {
-        // getter
-        return this.pos.getX();
-    }
-
-    /**
-     * @return position y du monstre
-     */
-    public int getY() {
-        //getter
-        return this.pos.getY();
-    }
 
     /**
      * Get la position
