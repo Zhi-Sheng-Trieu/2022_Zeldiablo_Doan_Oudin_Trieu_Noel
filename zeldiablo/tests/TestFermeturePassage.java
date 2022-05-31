@@ -18,8 +18,8 @@ public class TestFermeturePassage {
         assertEquals(3, laby.passageSecret.getPos().getX());
         assertEquals(2, laby.passageSecret.getPos().getY());
 
-        assertEquals(4, laby.boutonPassage.getPos().getX());
-        assertEquals(5, laby.boutonPassage.getPos().getY());
+        assertEquals(4, laby.boutonOuverture.getPos().getX());
+        assertEquals(5, laby.boutonOuverture.getPos().getY());
 
         assertEquals(4, laby.boutonFermeture.getPos().getX());
         assertEquals(4, laby.boutonFermeture.getPos().getY());

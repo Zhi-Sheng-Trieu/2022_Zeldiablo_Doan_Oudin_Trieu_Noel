@@ -1,11 +1,11 @@
 package gameLaby.laby;
 
-public class BoutonPassage {
+public class BoutonOuverture {
 
     private Position pos;
     private PassageSecret passageSecret;
 
-    public BoutonPassage(Position p, PassageSecret ps){
+    public BoutonOuverture(Position p, PassageSecret ps){
         this.pos = p;
         this.passageSecret = ps;
     }
