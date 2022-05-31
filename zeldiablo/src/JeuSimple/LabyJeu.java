@@ -73,13 +73,13 @@ public class LabyJeu implements Jeu {
             x = (int) Math.round(Math.random() * (this.getLength() - 1));
             y = (int) Math.round(Math.random() * (this.getLengthY() - 1));
             if (monstre.isEmpty()) {
-                if (!this.murs[x][y] && (this.personnage.getX() != x || this.personnage.getY() != y)) {
+                if (!this.murs[x][y] && (this.personnage.getX() != x || this.personnage.getY() != y) && (passageSecret.getPos().getX() != x || passageSecret.getPos().getY() != y)) {
                     arret = true;
                 }
             }
             else {
                 for (int i = 0; i < monstre.size(); i++) {
-                    if (!this.murs[x][y] && (this.monstre.get(i).getX() != x || this.monstre.get(i).getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y)) {
+                    if (!this.murs[x][y] && (this.monstre.get(i).getX() != x || this.monstre.get(i).getY() != y) && (this.personnage.getX() != x || this.personnage.getY() != y) && (passageSecret.getPos().getX() != x || passageSecret.getPos().getY() != y)) {
                         arret = true;
                     }
                 }
