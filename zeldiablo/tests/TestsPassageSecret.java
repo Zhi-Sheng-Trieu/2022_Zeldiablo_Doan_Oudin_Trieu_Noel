@@ -13,21 +13,21 @@ public class TestsPassageSecret {
      */
     public void testPassageSecret() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret.txt");
-        assertEquals(false, laby.passageSecret.etreOuvert());
-        assertEquals(3, laby.passageSecret.getPos().getX());
-        assertEquals(2, laby.passageSecret.getPos().getY());
-        assertEquals(4, laby.boutonOuverture.getPos().getX());
-        assertEquals(5, laby.boutonOuverture.getPos().getY());
+        assertEquals(false, laby.getPassageSecret().etreOuvert());
+        assertEquals(3, laby.getPassageSecret().getPos().getX());
+        assertEquals(2, laby.getPassageSecret().getPos().getY());
+        assertEquals(4, laby.getBoutonOuverture().getPos().getX());
+        assertEquals(5, laby.getBoutonOuverture().getPos().getY());
     }
 
     @Test
     public void testOuverturePassage() throws IOException {
-        Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret.txt");
-        assertEquals(false, laby.passageSecret.etreOuvert());
+        Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labygetPassageSecret.txt");
+        assertEquals(false, laby.getPassageSecret().etreOuvert());
         laby.deplacerPerso("Gauche");
-        assertEquals(4,laby.pj.getPos().getX());
-        assertEquals(5,laby.pj.getPos().getX());
-        assertEquals(true, laby.passageSecret.etreOuvert());
+        assertEquals(4,laby.getPj().getPos().getX());
+        assertEquals(5,laby.getPj().getPos().getX());
+        assertEquals(true, laby.getPassageSecret().etreOuvert());
     }
 
     /**
@@ -37,7 +37,7 @@ public class TestsPassageSecret {
     public void testPassageFerme_deplacement() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageSecret1.txt");
         laby.deplacerPerso("Gauche");
-        assertEquals(5, laby.pj.getPos().getX());
-        assertEquals(5, laby.pj.getPos().getX());
+        assertEquals(5, laby.getPj().getPos().getX());
+        assertEquals(5, laby.getPj().getPos().getX());
     }
 }
