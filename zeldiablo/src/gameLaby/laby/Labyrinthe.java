@@ -40,23 +40,23 @@ public class Labyrinthe {
     /**
      * attribut du personnage
      */
-    public Perso pj;
+    private Perso pj;
     /**
      * attribut du monstre
      */
-    public ArrayList<Monstre> monstre;
+    private ArrayList<Monstre> monstre;
 
     /**
      * attribut du passage secret
      */
-    public PassageSecret passageSecret;
-    public BoutonOuverture boutonOuverture;
-    public BoutonFermeture boutonFermeture;
+    private PassageSecret passageSecret;
+    private BoutonOuverture boutonOuverture;
+    private BoutonFermeture boutonFermeture;
 
     /**
      * les murs du labyrinthe
      */
-    public boolean[][] murs;
+    private boolean[][] murs;
 
     /**
      * retourne la case suivante selon une actions
