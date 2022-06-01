@@ -395,7 +395,7 @@ public class Labyrinthe {
         Stack<Position> pile = new Stack<>();
         pile.push(pos);
         //tant qu'on ne trouve pas la position du personnage
-        while (!pile.peek().posEquals(this.pj.getPos())) {
+        while (!pile.peek().posEquals(this.pj.getPos()) && !pile.isEmpty()) {
             Position p = pile.peek();
             visites[p.getX()][p.getY()] = true;
             //on regarde une position adjacente de la position actuelle de facon aleatoire
@@ -420,9 +420,6 @@ public class Labyrinthe {
 
         return new ArrayList<>(pile);
     }
-
-
-
 
     public ArrayList<Position> voisins(Position p) {
         ArrayList<Position> res = new ArrayList<>();
