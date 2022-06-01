@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Attaque du joueur + Mort du monstre : OUDIN Clement, DOAN Lancelot
-=======
 Attaque du joueur : OUDIN Clement, DOAN Lancelot
 
 Monstres au comportement intelligent : Noel Alexandre, Trieu Zhi-Sheng
