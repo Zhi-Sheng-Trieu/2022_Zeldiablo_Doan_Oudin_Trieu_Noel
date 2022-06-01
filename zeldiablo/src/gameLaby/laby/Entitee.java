@@ -20,11 +20,11 @@ public abstract class Entitee {
     }
 
     /**
-     * permet de savoir si le personnage est en x,y
+     * permet de savoir si l'entite est en x,y
      *
      * @param dx position testee
      * @param dy position testee
-     * @return true si le personnage est bien en (dx,dy)
+     * @return true si l'entite est bien en (dx,dy)
      */
     public boolean etrePresent(int dx, int dy) {
         return (this.pos.getX() == dx && this.pos.getY() == dy);
@@ -45,9 +45,17 @@ public abstract class Entitee {
     // ############################################
 
     /**
-     * @return position du personnage
+     * @return position de l'entite
      */
     public Position getPos() {
         return pos;
+    }
+
+    /**
+     *
+     * @return pv de l'entite
+     */
+    public int getPv() {
+        return pv;
     }
 }
