@@ -3,7 +3,6 @@
 title Diagramme de sequence de l'attaque du héros
 
 participant "main" as main
-participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
 participant "personnage : Perso" as personnage
 participant "monstre : Monstre" as monstre
@@ -12,10 +11,7 @@ participant "monstre : Monstre" as monstre
 
 
 activate main
-    main -> moteur : setTaille(width, height)
-    moteur --> main
-    main -> moteur : setFPS(fps)
-    moteur --> main
+
     main -> labyJeu : update(15, "Space")
 
     activate labyJeu
@@ -32,11 +28,6 @@ activate main
 
         labyJeu --> main
     deactivate labyJeu
-
-    main -> moteur : launch(labyJeu, labyDessin)
-    activate moteur
-    moteur --> main
-    deactivate moteur
 
 deactivate main
 

@@ -1,4 +1,8 @@
 
 Génération de Monstres immobiles : OUDIN Clement, DOAN Lancelot
+- Genere des monstre aleatoirement dans le labyrinthe.
+Le nombre de monstre doit etre fixe au debut du jeu.
+- Un monstre est genere lorsque le joueur fais 20 actions
+et que le nombre de monstre est inferieur a la limite.
 
 Ouvertures de passages secrets : TRIEU Zhi Sheng, NOEL Alexandre
