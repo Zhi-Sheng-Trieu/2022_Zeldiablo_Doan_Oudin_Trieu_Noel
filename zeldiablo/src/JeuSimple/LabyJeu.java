@@ -49,13 +49,23 @@ public class LabyJeu implements Jeu {
             x = (int) Math.round(Math.random() * (this.getLength() - 1));
             y = (int) Math.round(Math.random() * (this.getLengthY() - 1));
             if (lab.getMonstre().isEmpty()) {
-                if (!this.lab.getMurs()[x][y] && (! this.lab.getPj().getPos().posEquals(x, y)) && (!lab.getPassageSecret().getPos().posEquals(x, y))) {
+                if (!this.lab.getMurs()[x][y] && (! this.lab.getPj().getPos().posEquals(x, y))) {
                     arret = true;
+                    if (lab.getPassageSecret() != null){
+                        if ((lab.getPassageSecret().getPos().posEquals(x, y))) {
+                            arret = false;
+                        }
+                    }
                 }
             } else {
                 for (Monstre value : lab.getMonstre()) {
-                    if (!this.lab.getMurs()[x][y] && (!value.getPos().posEquals(x, y)) && (! this.lab.getPj().getPos().posEquals(x, y)) && (!lab.getPassageSecret().getPos().posEquals(x, y))) {
+                    if (!this.lab.getMurs()[x][y] && (!value.getPos().posEquals(x, y)) && (! this.lab.getPj().getPos().posEquals(x, y))) {
                         arret = true;
+                        if (lab.getPassageSecret() != null){
+                            if ((lab.getPassageSecret().getPos().posEquals(x, y))) {
+                                arret = false;
+                            }
+                        }
                     }
                 }
             }

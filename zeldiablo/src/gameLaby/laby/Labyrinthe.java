@@ -236,6 +236,13 @@ public class Labyrinthe {
         //on recupere le meilleur chemin vers le perso
         //ce chin inclu la position du monstre et du perso
         ArrayList<Position> chemin = this.recherche(m.getPos());
+        ArrayList<Position> chemin2;
+        for (int i = 0; i < 100; i++) {
+            chemin2 = this.recherche(m.getPos());
+            if (chemin2.size()<chemin.size()){
+                chemin = chemin2;
+            }
+        }
         //si il n'y a aucun chemin vers le perssonage on fait un mouvement aleatoire
         switch (chemin.size()) {
             case 0:
