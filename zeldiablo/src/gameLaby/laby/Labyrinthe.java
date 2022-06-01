@@ -233,26 +233,16 @@ public class Labyrinthe {
      * Methode permettant de deplacer le monstre selon les deplacements du joueur
      */
     public void deplacerMonstre(Monstre m) {
-<<<<<<< HEAD
-        // On choisi un nombre au hasard
-        Random random = new Random();
-        int aleaNb = random.nextInt(4);
-
-        String action = "";
-
-        // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
-        switch (aleaNb) {
-=======
         //on recupere le meilleur chemin vers le perso
         //ce chin inclu la position du monstre et du perso
         ArrayList<Position> chemin = this.recherche(m.getPos());
         //si il n'y a aucun chemin vers le perssonage on fait un mouvement aleatoire
         switch (chemin.size()) {
->>>>>>> commit
             case 0:
             case 1:
                 // On choisi un nombre au hasard
-                int aleaNb = (int) Math.round(Math.random() * 3);
+                Random random = new Random();
+                int aleaNb = random.nextInt(4);
 
                 String action = "";
 
