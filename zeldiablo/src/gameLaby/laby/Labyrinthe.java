@@ -377,12 +377,20 @@ public class Labyrinthe {
         if (this.pj.getPos().posEquals(x, y)) {
             valeurCase = PJ;
         } else {
-            //sinon si la case contient la sortie
-            if (this.passageSecret.getPos().posEquals(x, y)) {
-                valeurCase = PASSAGE;
+            if (this.passageSecret != null) {
+                //sinon si la case contient la sortie
+                if (this.passageSecret.getPos().posEquals(x, y)) {
+                    valeurCase = PASSAGE;
+                } else {
+                    valeurCase = VIDE;
+                }
             } else {
-                if (this.boutonOuverture.getPos().posEquals(x, y)) {
-                    valeurCase = BOUTON;
+                if (this.passageSecret != null) {
+                    if (this.boutonOuverture.getPos().posEquals(x, y)) {
+                        valeurCase = BOUTON;
+                    } else {
+                        valeurCase = VIDE;
+                    }
                 } else {
                     //si la case est vide
                     if (!this.murs[x][y]) {
