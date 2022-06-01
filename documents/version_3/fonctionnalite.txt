@@ -4,3 +4,11 @@ Fermeture de Passage : Noel Alexandre, Trieu Zhi-Sheng
 
 
 
+Deplacement et colisions des monstres :
+
+Aucun problèmes majeurs rencontrés.
+Les déplacements aléatoires se réalisent correctement et se déroulent lorsque le joueur bouge.
+Les colisions ont étés gérés en même temps que les mouvements.
+
+
+
