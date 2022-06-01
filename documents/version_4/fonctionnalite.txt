@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 Attaque du joueur + Mort du monstre : OUDIN Clement, DOAN Lancelot
+=======
+Attaque du joueur : OUDIN Clement, DOAN Lancelot
+
+Monstres au comportement intelligent : Noel Alexandre, Trieu Zhi-Sheng
+
+critères de validation :
+- Avant son déplacement, le monstre détermine le meilleur chemin pour atteindre
+le héros en prenant en compte les obstacles.
+- lorsqu'il se déplace, le monstre suit le meilleur chemin et parvient
+jusqu'au héros même s'il y a des obstacles.
+
