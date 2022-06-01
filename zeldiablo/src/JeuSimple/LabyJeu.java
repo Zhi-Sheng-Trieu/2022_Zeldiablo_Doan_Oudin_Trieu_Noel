@@ -14,22 +14,6 @@ import java.util.ArrayList;
 public class LabyJeu implements Jeu {
 
     /**
-     * Perso representant le personnage
-     */
-    private Perso personnage;
-    /**
-     * Perso representant le monstre
-     */
-    private ArrayList<Monstre> monstre;
-    /**
-     * Liste des murs du laby
-     */
-    private boolean[][] murs;
-
-    private PassageSecret passageSecret;
-    private BoutonOuverture boutonOuverture;
-    private BoutonFermeture boutonFermeture;
-    /**
      * Labyrinthe du jeu
      */
     private Labyrinthe lab;
@@ -54,12 +38,6 @@ public class LabyJeu implements Jeu {
         // On cree un nouveau labyrinthe a partir du nom donné en param
         Labyrinthe laby = new Labyrinthe(nom);
         this.lab = laby;
-        this.murs = lab.murs;
-        this.personnage = lab.pj;
-        this.monstre = lab.monstre;
-        this.passageSecret = lab.passageSecret;
-        this.boutonOuverture = lab.boutonOuverture;
-        this.boutonFermeture = lab.boutonFermeture;
         this.compteur = 0;
     }
 
@@ -70,19 +48,19 @@ public class LabyJeu implements Jeu {
         while (!arret) {
             x = (int) Math.round(Math.random() * (this.getLength() - 1));
             y = (int) Math.round(Math.random() * (this.getLengthY() - 1));
-            if (monstre.isEmpty()) {
-                if (!this.murs[x][y] && (! this.personnage.getPos().posEquals(x, y)) && (!passageSecret.getPos().posEquals(x, y))) {
+            if (lab.getMonstre().isEmpty()) {
+                if (!this.lab.getMurs()[x][y] && (! this.lab.getPj().getPos().posEquals(x, y)) && (!lab.getPassageSecret().getPos().posEquals(x, y))) {
                     arret = true;
                 }
             } else {
-                for (Monstre value : monstre) {
-                    if (!this.murs[x][y] && (!value.getPos().posEquals(x, y)) && (! this.personnage.getPos().posEquals(x, y)) && (!passageSecret.getPos().posEquals(x, y))) {
+                for (Monstre value : lab.getMonstre()) {
+                    if (!this.lab.getMurs()[x][y] && (!value.getPos().posEquals(x, y)) && (! this.lab.getPj().getPos().posEquals(x, y)) && (!lab.getPassageSecret().getPos().posEquals(x, y))) {
                         arret = true;
                     }
                 }
             }
         }
-        this.monstre.add(new Monstre(x, y));
+        this.lab.getMonstre().add(new Monstre(x, y));
     }
 
 
@@ -116,32 +94,29 @@ public class LabyJeu implements Jeu {
         }
 
         if(clavier.space){
-            for (int i = 0; i < monstre.size() ; i++) {
-                if((personnage.getPos().getX()+1 == monstre.get(i).getPos().getX() && personnage.getPos().getY() == monstre.get(i).getPos().getY())
-                        || (personnage.getPos().getX() == monstre.get(i).getPos().getX() && personnage.getPos().getY()+1 == monstre.get(i).getPos().getY())
-                        || (personnage.getPos().getX()-1 == monstre.get(i).getPos().getX() && personnage.getPos().getY() == monstre.get(i).getPos().getY())
-                        || (personnage.getPos().getX() == monstre.get(i).getPos().getX() && personnage.getPos().getY()-1 == monstre.get(i).getPos().getY())){
-                    if(personnage.attaquer(monstre.get(i))){
-                        monstre.remove(i);
+            for (int i = 0; i < lab.getMonstre().size() ; i++) {
+                if((lab.getPj().getPos().getX()+1 == lab.getMonstre().get(i).getPos().getX() && lab.getPj().getPos().getY() == lab.getMonstre().get(i).getPos().getY())
+                        || (lab.getPj().getPos().getX() == lab.getMonstre().get(i).getPos().getX() && lab.getPj().getPos().getY()+1 == lab.getMonstre().get(i).getPos().getY())
+                        || (lab.getPj().getPos().getX()-1 == lab.getMonstre().get(i).getPos().getX() && lab.getPj().getPos().getY() == lab.getMonstre().get(i).getPos().getY())
+                        || (lab.getPj().getPos().getX() == lab.getMonstre().get(i).getPos().getX() && lab.getPj().getPos().getY()-1 == lab.getMonstre().get(i).getPos().getY())){
+                    if(lab.getPj().attaquer(lab.getMonstre().get(i))){
+                        lab.getMonstre().remove(i);
                     }
                     else{
-                        this.lab.deplacerMonstre(monstre.get(i));
+                        this.lab.deplacerMonstre(lab.getMonstre().get(i));
                     }
                 }else{
-                    this.lab.deplacerMonstre(monstre.get(i));
+                    this.lab.deplacerMonstre(lab.getMonstre().get(i));
                 }
             }
             genererMonstre();
         }
-
-        // On met a jour les position du perso
-        this.personnage = this.lab.pj;
     }
 
 
     public void genererMonstre() {
         this.compteur += 1;
-        if (this.compteur >= 20 && this.monstre.size() < limite) {
+        if (this.compteur >= 20 && this.lab.getMonstre().size() < limite) {
             this.ajouterMonstre();
             this.compteur = 0;
         }
@@ -172,7 +147,7 @@ public class LabyJeu implements Jeu {
      * @return
      */
     public int getLengthY() {
-        return murs[0].length;
+        return lab.getMurs()[0].length;
     }
 
     /**
@@ -181,14 +156,14 @@ public class LabyJeu implements Jeu {
      * @return
      */
     public int getLength() {
-        return murs.length;
+        return lab.getMurs().length;
     }
 
     /**
      * Permet de recuperer le mur
      */
     public boolean[][] getMurs() {
-        return this.murs;
+        return lab.getMurs();
     }
 
     /**
@@ -197,7 +172,7 @@ public class LabyJeu implements Jeu {
      * @return
      */
     public Perso getPj() {
-        return this.personnage;
+        return this.lab.getPj();
     }
 
     /**
@@ -206,18 +181,18 @@ public class LabyJeu implements Jeu {
      * @return
      */
     public ArrayList<Monstre> getMonstre() {
-        return this.monstre;
+        return this.lab.getMonstre();
     }
 
     public PassageSecret getPassageSecret() {
-        return passageSecret;
+        return lab.getPassageSecret();
     }
 
     public BoutonOuverture getBoutonOuverture() {
-        return this.boutonOuverture;
+        return lab.getBoutonOuverture();
     }
 
     public BoutonFermeture getBoutonFermeture() {
-        return this.boutonFermeture;
+        return lab.getBoutonFermeture();
     }
 }
