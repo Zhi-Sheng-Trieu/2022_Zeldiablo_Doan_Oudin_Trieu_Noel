@@ -29,4 +29,3 @@ critères de validation :
 le héros en prenant en compte les obstacles.
 - lorsqu'il se déplace, le monstre suit le meilleur chemin et parvient
 jusqu'au héros même s'il y a des obstacles.
-

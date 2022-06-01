@@ -10,6 +10,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // charge le labyrinthe
+<<<<<<< HEAD
+        Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyMonstre.txt");
+
+        System.out.println(laby);
+        ArrayList<Position> positions = laby.recherche(laby.monstre.get(0).getPos());
+        System.out.println(positions);
+=======
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/grandLaby.txt");
 
         System.out.println(laby);
@@ -25,5 +32,6 @@ public class Main {
         for (Position p : chemin) {
             System.out.println(p.getX() + " " + p.getY());
         }
+>>>>>>> 09a44b222d347e2a0e2137a1d9620a90421cbcd6
     }
 }
