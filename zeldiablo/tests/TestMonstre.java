@@ -78,4 +78,39 @@ public class TestMonstre {
         labyJeu.update(15,clavier);
         assertEquals(1,labyJeu.getMonstre().get(0).getPv(),"Le monstre doit perdre des pv");
     }
+
+    @Test
+    public void test5_attaqueJoueur_MonstreDistant() throws IOException {
+        // On cree
+        LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstre.txt");
+        Clavier clavier = new Clavier();
+
+        // On regarde les pv du mosntre
+        assertEquals(2,labyJeu.getMonstre().get(0).getPv(),"Le monstre doit avoir 2 pv");
+
+        // On garde en memoire les coordonnees du monstre
+        int x = labyJeu.getMonstre().get(0).getPos().getX();
+        int y = labyJeu.getMonstre().get(0).getPos().getY();
+
+        // On attaque
+        clavier.setSpace(true);
+        labyJeu.update(15,clavier);
+
+        // On verifie
+        assertEquals(2,labyJeu.getMonstre().get(0).getPv(),"Le monstre n'aurait pas du perdre de vie");
+
+        // On regarde si les coordonnées du monstre sont les bonnes
+        assertEquals(labyJeu.getMonstre().get(0).etrePresent(x, y), false, "Le monstre aurait du changer d'emplacement");
+
+        // On attaque de nouveau
+        labyJeu.update(15,clavier);
+
+        // On verifie
+        assertEquals(2,labyJeu.getMonstre().get(0).getPv(),"Le monstre n'aurait pas du perdre de vie");
+
+        // On regarde si le monstre est toujours present
+        assertEquals(1,labyJeu.getMonstre().size(),"Le monstre n aurait pas du disparaitre");
+
+
+    }
 }
