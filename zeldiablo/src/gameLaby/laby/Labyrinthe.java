@@ -448,4 +448,27 @@ public class Labyrinthe {
         return res;
     }
 
+    public Perso getPj() {
+        return pj;
+    }
+
+    public ArrayList<Monstre> getMonstre() {
+        return monstre;
+    }
+
+    public boolean[][] getMurs() {
+        return murs;
+    }
+
+    public BoutonFermeture getBoutonFermeture() {
+        return boutonFermeture;
+    }
+
+    public PassageSecret getPassageSecret() {
+        return passageSecret;
+    }
+
+    public BoutonOuverture getBoutonOuverture() {
+        return boutonOuverture;
+    }
 }
