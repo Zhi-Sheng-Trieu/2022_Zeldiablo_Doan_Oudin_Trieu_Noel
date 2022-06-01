@@ -1,0 +1,14 @@
+recherche d'un chemin vers le perso :
+on utilise l'algo de la recherche en profondeur (Deep First Search)
+elle a besoin d'une pile pour sauvegarder son chemin
+et une liste de cases visitées
+
+on part de la case du monstre
+
+on choisi une case voisine aléatoirement qui n'est ni visitée ni un mur ni un passage fermé
+on ajoute cette case à la pile
+on ajoute cette case à la liste des cases visitées
+
+et on reitère le processus
+au moment où toutes les cases voisines sont soit déjà visitées, soit invalides
+on retire la dernière case de la pile pour retouner en arrière
