@@ -20,19 +20,24 @@ activate main
         activate laby
             labyJeu -> laby : deplacerPerso("droite")
             activate personnage
+
                 laby -> laby : int[] suivante = getSuivant(courante[0], courante[1], action)
                 laby -> personnage : setX(suivante[0])
                 personnage --> laby
                 laby -> personnage : setY(suivante[1])
                 personnage --> laby
+
             deactivate personnage
             laby -> laby : deplacerMonstre(value)
             activate monstre
+                loop loop
                 laby -> laby : int[] suivante = getSuivant(courante[0], courante[1], action)
                 laby -> monstre : setX(suivante[0])
                 monstre --> laby
                 laby -> monstre : setX(suivante[1])
                 monstre --> laby
+                end
+
             deactivate monstre
             laby -> laby : deplacementPossible(suivante)
             laby --> labyJeu
