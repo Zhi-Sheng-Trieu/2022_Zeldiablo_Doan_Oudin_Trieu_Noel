@@ -1,5 +1,9 @@
 package gameLaby.laby;
 
+/**
+ * gere un monstre situe en x,y
+ */
+
 public class Monstre extends Entitee{
 
     /**
