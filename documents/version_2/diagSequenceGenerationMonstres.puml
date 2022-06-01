@@ -1,36 +1,33 @@
 @startuml
 participant "main" as main
-participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
-participant "labyDessin : LabyDessin" as labyDessin
 participant "laby : Labyrinthe" as laby
+participant "personnage : Perso" as personnage
+
 
 
 activate main
-    main -> moteur : setTaille(width, height)
-    moteur --> main
-    main -> moteur : setFPS(fps)
-    moteur --> main
-    create labyJeu
-    main -> labyJeu : new
-    create labyDessin
-    main -> labyDessin : new
+
 
     activate labyJeu
         main -> labyJeu : update(15.0, "Droite")
         labyJeu -> labyJeu : ajouterMonstre()
         activate laby
-            labyJeu -> laby : deplacerPerso()
-            laby --> labyJeu
+            activate personnage
+                labyJeu -> laby : deplacerPerso()
+                laby -> laby : int[] suivante = getSuivant(courante[0], courante[1], action)
+                laby -> personnage : setX(suivante[0])
+                personnage --> laby
+                laby -> personnage : setY(suivante[1])
+                personnage --> laby
+                laby --> labyJeu
+            deactivate personnage
         deactivate laby
 
     labyJeu --> main
     deactivate labyJeu
 
-    main -> moteur : launch(labyJeu, labyDessin)
-    activate moteur
-    moteur -> main
-    deactivate moteur
+
 
 deactivate main
 
