@@ -438,14 +438,15 @@ public class Labyrinthe {
         while ((!pile.isEmpty()) && (!pile.peek().posEquals(this.pj.getPos()))) {
             Position p = pile.peek();
             visites[p.getX()][p.getY()] = true;
-            //on regarde une position adjacente de la position actuelle de facon aleatoire
+            //on recupere les positions adjacentes
             ArrayList<Position> voisins = this.voisins(p);
 
             //on cherche si une position n'a pas ete visitee et si c'est un personnage
-            int i = 0;
             boolean valide = false;
-            while (i < voisins.size() && !valide) {
+            while (voisins.size()>0 && !valide) {
+                int i = (int) Math.round(Math.random() * (voisins.size() - 1));
                 Position voisin = voisins.get(i);
+                voisins.remove(i);
 
                 if (voisin.posEquals(this.pj.getPos()) || !visites[voisin.getX()][voisin.getY()]) {
                     pile.push(voisin);
