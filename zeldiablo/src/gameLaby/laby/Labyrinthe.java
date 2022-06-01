@@ -237,7 +237,8 @@ public class Labyrinthe {
         //ce chin inclu la position du monstre et du perso
         ArrayList<Position> chemin = this.recherche(m.getPos());
         ArrayList<Position> chemin2;
-        for (int i = 0; i < 100; i++) {
+        //on cherche le meilleur chemin
+        for (int i = 0; i < 5; i++) {
             chemin2 = this.recherche(m.getPos());
             if (chemin2.size()<chemin.size()){
                 chemin = chemin2;
