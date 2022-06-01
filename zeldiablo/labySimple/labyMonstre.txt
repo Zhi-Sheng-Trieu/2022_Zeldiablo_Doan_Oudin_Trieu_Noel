@@ -4,6 +4,6 @@ XXXXXXXXXX
 X.....XX.X
 X.X...M..X
 X......X.X
-X........X
-X..XXP...X
+X#.......X
+Xo.XXP...X
 XXXXXXXXXX

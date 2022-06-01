@@ -1,1 +1,9 @@
 Attaque du joueur : OUDIN Clement, DOAN Lancelot
+
+
+NOEL Alexandre, TRIEU Zhi-Sheng :
+Monstres au comportement intelligent
+
+Critères de validité :
+    -Le monstre doit déterminer le meilleur chemin pour atteindre le héros
+    -Le monstre prend en compte les obstacles

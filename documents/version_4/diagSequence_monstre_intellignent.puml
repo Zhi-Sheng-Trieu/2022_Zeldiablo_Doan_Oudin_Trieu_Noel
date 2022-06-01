@@ -1,0 +1,30 @@
+@startuml
+
+title Diagramme de séquence de la méthode de recherche d'un personnage par un monstre
+
+participant "main" as main
+participant "laby: Labyrinthe" as laby
+participant "perso : Perso" as perso
+participant "monstre : Monstre" as monstre
+
+activate main
+    activate laby
+    main -> laby : deplacerPerso(Gauche)
+
+    laby -> perso : setX(suivant[0])
+    perso --> laby
+    laby -> perso : setY(suivant[1])
+    perso --> laby
+    laby -> laby : DEBUT deplacerMonstre(monstre)
+    laby -> laby : recherchePerso(monstre.getPos()
+    laby -> monstre : setX(suivant[0])
+    monstre --> laby
+    laby -> mosntre : setY(suivant[1])
+    monstre --> laby
+    laby -> laby : FIN deplacerMonstre(monstre)
+    laby --> main
+    deactivate laby
+
+
+
+@enduml
