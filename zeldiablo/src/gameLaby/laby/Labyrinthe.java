@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
+
 import static JeuSimple.LabyDessin.TAILLE;
+
 import java.util.Stack;
 
 /**
@@ -231,6 +233,7 @@ public class Labyrinthe {
      * Methode permettant de deplacer le monstre selon les deplacements du joueur
      */
     public void deplacerMonstre(Monstre m) {
+<<<<<<< HEAD
         // On choisi un nombre au hasard
         Random random = new Random();
         int aleaNb = random.nextInt(4);
@@ -239,33 +242,58 @@ public class Labyrinthe {
 
         // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
         switch (aleaNb) {
+=======
+        //on recupere le meilleur chemin vers le perso
+        //ce chin inclu la position du monstre et du perso
+        ArrayList<Position> chemin = this.recherche(m.getPos());
+        //si il n'y a aucun chemin vers le perssonage on fait un mouvement aleatoire
+        switch (chemin.size()) {
+>>>>>>> commit
             case 0:
-                action = "Haut";
-                break;
             case 1:
-                action = "Bas";
+                // On choisi un nombre au hasard
+                int aleaNb = (int) Math.round(Math.random() * 3);
+
+                String action = "";
+
+                // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
+                switch (aleaNb) {
+                    case 0:
+                        action = "Haut";
+                        break;
+                    case 1:
+                        action = "Bas";
+                        break;
+                    case 2:
+                        action = "Droite";
+                        break;
+                    case 3:
+                        action = "Gauche";
+                        break;
+                }
+
+                // calcule case suivante
+                int[] suivante = getSuivant(m.getPos().getX(), m.getPos().getY(), action);
+                // si c'est pas un mur ou un monstre, on effectue le deplacement
+
+                if (this.deplacementPossible(suivante)) {
+                    // on met a jour le monstre
+                    m.getPos().setX(suivante[0]);
+                    m.getPos().setY(suivante[1]);
+                }
                 break;
             case 2:
-                action = "Droite";
+                //si la longueur du chemin est de 2, cela veut dire que la prochaine case est le perso
+                //si la prochaine case est le perso on ne bouge pas pour pas empierter
                 break;
-            case 3:
-                action = "Gauche";
-                break;
+            default:
+                //si ce n'est pas un cas particulier, on bouge le monstre vers le perso
+                m.getPos().setX(chemin.get(1).getX());
+                m.getPos().setY(chemin.get(1).getY());
+
+
         }
 
-        // case courante
-        int[] courante = {m.getPos().getX(), m.getPos().getY()};
-
-        // calcule case suivante
-        int[] suivante = getSuivant(courante[0], courante[1], action);
-
-        // si c'est pas un mur ou un monstre, on effectue le deplacement
-
-        if (this.deplacementPossible(suivante)) {
-            // on met a jour le monstre
-            m.getPos().setX(suivante[0]);
-            m.getPos().setY(suivante[1]);
-        }
 
     }
 
@@ -402,56 +430,71 @@ public class Labyrinthe {
         Stack<Position> pile = new Stack<>();
         pile.push(pos);
         //tant qu'on ne trouve pas la position du personnage
-        while (!pile.peek().posEquals(this.pj.getPos()) && !pile.isEmpty()) {
+        while ((!pile.isEmpty()) && (!pile.peek().posEquals(this.pj.getPos()))) {
             Position p = pile.peek();
             visites[p.getX()][p.getY()] = true;
             //on regarde une position adjacente de la position actuelle de facon aleatoire
             ArrayList<Position> voisins = this.voisins(p);
 
-            //si la position n'a pas ete visitee
+            //on cherche si une position n'a pas ete visitee et si c'est un personnage
             int i = 0;
             boolean valide = false;
             while (i < voisins.size() && !valide) {
                 Position voisin = voisins.get(i);
-                ;
-                if (!visites[voisin.getX()][voisin.getY()]) {
+
+                if (voisin.posEquals(this.pj.getPos()) || !visites[voisin.getX()][voisin.getY()]) {
                     pile.push(voisin);
                     valide = true;
                 }
                 i++;
             }
+            //si aucune position n'est ni valide ni non-visitee
+            //cela veut dire qu'on doit revenir en arriere
             if (!valide) {
                 pile.pop();
             }
         }
-
         return new ArrayList<>(pile);
     }
 
+    /**
+     * Le resultat sera soit les voisins valides soit juste le personnage si on le trouve
+     *
+     * @param p
+     * @return
+     */
     public ArrayList<Position> voisins(Position p) {
+
         ArrayList<Position> res = new ArrayList<>();
         int x = p.getX();
         int y = p.getY();
-        if (x > 0) {
-            if ((!this.murs[x - 1][y]) && (!this.passageSecret.getPos().posEquals(x - 1, y))) {
-                res.add(new Position(x - 1, y));
+
+        //on recupere les positions des voisins
+        ArrayList<int[]> liste = new ArrayList<>();
+        liste.add(getSuivant(x, y, GAUCHE));
+        liste.add(getSuivant(x, y, DROITE));
+        liste.add(getSuivant(x, y, HAUT));
+        liste.add(getSuivant(x, y, BAS));
+
+        // on cherche le personnage parmi les voisins
+        boolean trouve = false;
+        int i = 0;
+        while (i < liste.size() && !trouve) {
+            int[] pos = liste.get(i);
+            Position p2 = new Position(pos[0], pos[1]);
+            if (deplacementPossible(pos)) {
+                //si la position est valide elle fera partie des voisins valides
+                res.add(p2);
+            } else if (this.pj.getPos().posEquals(pos[0], pos[1])) {
+                //si on trouve le personnage
+                //la liste ne contiendra que le personnage
+                res.clear();
+                res.add(p2);
+                trouve = true;
             }
+            i++;
         }
-        if (x < this.getLength() - 1) {
-            if ((!this.murs[x + 1][y]) && (!this.passageSecret.getPos().posEquals(x + 1, y))) {
-                res.add(new Position(x + 1, y));
-            }
-        }
-        if (y > 0) {
-            if ((!this.murs[x][y - 1]) && (!this.passageSecret.getPos().posEquals(x, y - 1))) {
-                res.add(new Position(x, y - 1));
-            }
-        }
-        if (y < this.getLengthY() - 1) {
-            if ((!this.murs[x][y + 1]) && (!this.passageSecret.getPos().posEquals(x, y + 1))) {
-                res.add(new Position(x, y + 1));
-            }
-        }
+
         return res;
     }
 
