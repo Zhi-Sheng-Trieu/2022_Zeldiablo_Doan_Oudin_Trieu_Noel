@@ -14,24 +14,24 @@ public class TestFermeturePassage {
      */
     public void testPassageSecret() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyFermePassage.txt");
-        assertEquals(false, laby.passageSecret.etreOuvert());
-        assertEquals(3, laby.passageSecret.getPos().getX());
-        assertEquals(2, laby.passageSecret.getPos().getY());
+        assertEquals(false, laby.getPassageSecret().etreOuvert());
+        assertEquals(3, laby.getPassageSecret().getPos().getX());
+        assertEquals(2, laby.getPassageSecret().getPos().getY());
 
-        assertEquals(4, laby.boutonOuverture.getPos().getX());
-        assertEquals(5, laby.boutonOuverture.getPos().getY());
+        assertEquals(4, laby.getBoutonOuverture().getPos().getX());
+        assertEquals(5, laby.getBoutonOuverture().getPos().getY());
 
-        assertEquals(4, laby.boutonFermeture.getPos().getX());
-        assertEquals(4, laby.boutonFermeture.getPos().getY());
+        assertEquals(4, laby.getBoutonFermeture().getPos().getX());
+        assertEquals(4, laby.getBoutonFermeture().getPos().getY());
     }
 
     @Test
     public void testOuverturePassage() throws IOException {
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyFermePassage.txt");
-        assertEquals(false, laby.passageSecret.etreOuvert());
+        assertEquals(false, laby.getPassageSecret().etreOuvert());
         laby.deplacerPerso("Gauche");
-        assertEquals(true, laby.passageSecret.etreOuvert());
+        assertEquals(true, laby.getPassageSecret().etreOuvert());
         laby.deplacerPerso("Haut");
-        assertEquals(false, laby.passageSecret.etreOuvert());
+        assertEquals(false, laby.getPassageSecret().etreOuvert());
     }
 }
