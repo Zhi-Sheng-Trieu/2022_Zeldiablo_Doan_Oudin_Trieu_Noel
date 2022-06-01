@@ -42,7 +42,7 @@ public class LabyJeu implements Jeu {
     /**
      * Limite de monstre
      */
-    private static int limite = 2;
+    private final static int limite = 2;
 
 
     /**

@@ -1,9 +1,12 @@
 package gameLaby.laby;
 
+import javafx.geometry.Pos;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -137,7 +140,7 @@ public class Labyrinthe {
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne,10);
+                        this.pj = new Perso(colonne, numeroLigne, 10);
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
@@ -167,7 +170,7 @@ public class Labyrinthe {
             numeroLigne++;
         }
         //si on a trouvé un passage secret dans le fichier texte
-        if (pos_passage != null){
+        if (pos_passage != null) {
             this.passageSecret = new PassageSecret(pos_passage);
         }
         if (pos_bouton != null) {
@@ -221,14 +224,14 @@ public class Labyrinthe {
     /**
      * Methode permettant de deplacer le monstre selon les deplacements du joueur
      */
-    public void deplacerMonstre(Monstre m){
+    public void deplacerMonstre(Monstre m) {
         // On choisi un nombre au hasard
-        int aleaNb = (int)Math.round(Math.random()*3);
+        int aleaNb = (int) Math.round(Math.random() * 3);
 
         String action = "";
 
         // Selon le nombre aleatoire, le monstre va se deplacer dans une direction
-        switch (aleaNb){
+        switch (aleaNb) {
             case 0:
                 action = "Haut";
                 break;
@@ -262,6 +265,7 @@ public class Labyrinthe {
 
     /**
      * Methode permettant de savoir si la case suivante est dispo
+     *
      * @param suivant la case a selectionner
      * @return Si le deplacement est possible sur la case selectionnee
      */
@@ -270,10 +274,9 @@ public class Labyrinthe {
         //on vérifie si on ne se déplace pas sur un mur
         if (!this.murs[suivant[0]][suivant[1]]) {
             // on vérifie si la position n'est pas la même que le personnage
-            if (this.pj.getPos().posEquals(suivant[0], suivant[1])){
+            if (this.pj.getPos().posEquals(suivant[0], suivant[1])) {
                 valide = false;
-            }
-            else {
+            } else {
                 //s'il existe un passage secret, on vérifie si le passage secret est ouvert ou non
                 if (this.passageSecret != null) {
                     if (this.passageSecret.getPos().posEquals(suivant[0], suivant[1])) {
@@ -292,14 +295,12 @@ public class Labyrinthe {
                     }
                 }
             }
-        }
-        else{
+        } else {
             //s'il y a un mur
             valide = false;
         }
         return valide;
     }
-
 
 
     /**
@@ -376,8 +377,8 @@ public class Labyrinthe {
 
         String res = "";
 
-        res += murs.length+"\n";
-        res += murs[0].length+"\n";
+        res += murs.length + "\n";
+        res += murs[0].length + "\n";
         for (int i = 0; i < murs[0].length; i++) {
             for (int j = 0; j < murs.length; j++) {
                 res += getChar(j, i);
@@ -386,4 +387,68 @@ public class Labyrinthe {
         }
         return res;
     }
+
+    public ArrayList<Position> recherche(Position pos) {
+        //on a une liste des positions visitees
+        boolean[][] visites = new boolean[this.getLength()][this.getLengthY()];
+        //on garde le chemin qu'on prend grace a une pile
+        Stack<Position> pile = new Stack<>();
+        pile.push(pos);
+        //tant qu'on ne trouve pas la position du personnage
+        while (!pile.peek().posEquals(this.pj.getPos())) {
+            Position p = pile.peek();
+            visites[p.getX()][p.getY()] = true;
+            //on regarde une position adjacente de la position actuelle de facon aleatoire
+            ArrayList<Position> voisins = this.voisins(p);
+
+            //si la position n'a pas ete visitee
+            int i = 0;
+            boolean valide = false;
+            while (i < voisins.size() && !valide) {
+                Position voisin = voisins.get(i);
+                ;
+                if (!visites[voisin.getX()][voisin.getY()]) {
+                    pile.push(voisin);
+                    valide = true;
+                }
+                i++;
+            }
+            if (!valide) {
+                pile.pop();
+            }
+        }
+
+        return new ArrayList<>(pile);
+    }
+
+
+
+
+    public ArrayList<Position> voisins(Position p) {
+        ArrayList<Position> res = new ArrayList<>();
+        int x = p.getX();
+        int y = p.getY();
+        if (x > 0) {
+            if ((!this.murs[x - 1][y]) && (!this.passageSecret.getPos().posEquals(x - 1, y))) {
+                res.add(new Position(x - 1, y));
+            }
+        }
+        if (x < this.getLength() - 1) {
+            if ((!this.murs[x + 1][y]) && (!this.passageSecret.getPos().posEquals(x + 1, y))) {
+                res.add(new Position(x + 1, y));
+            }
+        }
+        if (y > 0) {
+            if ((!this.murs[x][y - 1]) && (!this.passageSecret.getPos().posEquals(x, y - 1))) {
+                res.add(new Position(x, y - 1));
+            }
+        }
+        if (y < this.getLengthY() - 1) {
+            if ((!this.murs[x][y + 1]) && (!this.passageSecret.getPos().posEquals(x, y + 1))) {
+                res.add(new Position(x, y + 1));
+            }
+        }
+        return res;
+    }
+
 }

@@ -89,7 +89,7 @@ class LabyJeu{
 }
 
 LabyJeu "1" -> "*" Labyrinthe : -lab
-LabyJeu "1" --> "1" boutonOuverture : -boutonOuverture
+LabyJeu "1" --> "1" BoutonOuverture : -boutonOuverture
 LabyJeu "1" --> "1" PassageSecret : -passageSecret
 LabyJeu "1" --> "1" BoutonFermeture : -boutonFermeture
 LabyJeu "1" --> "1" Perso : -personnage
