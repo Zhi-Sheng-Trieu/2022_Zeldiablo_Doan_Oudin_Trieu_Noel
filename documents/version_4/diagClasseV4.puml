@@ -34,11 +34,6 @@ class LabyJeu{
 }
 
 LabyJeu ..|> Jeu
-LabyJeu "1"->"1" Perso : -personnage
-LabyJeu "1"->"*" Monstre : -monstre
-LabyJeu "1"->"1" PassageSecret : -passageSecret
-LabyJeu "1"->"1" BoutonOuverture : -boutonOuverture
-LabyJeu "1"->"1" BoutonFermeture : -boutonFermeture
 LabyJeu "1"-->"1" Labyrinthe : -lab
 
 
@@ -75,14 +70,12 @@ class Labyrinthe{
 }
 class Perso {
     +Perso(int dx, int dy) : Perso
-    +etrePresent(int dx, int dy) : boolean
-    +getPos() : Position
+    +attaquer(Entitee e) : boolean
 }
 
 class Monstre{
     +Monstre(int dx, int dy)
-    +etrePresent(int dx, int dy) : boolean
-    +getPos() : Position
+    +attaquer(Entitee e) : boolean
 }
 
 class PassageSecret {
@@ -118,6 +111,18 @@ class Position {
     +posEquals(int x, int y) : boolean
 }
 
+class Entite{
+    +DEGAT : int
+    -pv : int
+    +Entitee(int dx, int dy)
+    +Entitee(int dx, int dy,int pv)
+    +etrePresent(int dx, int dy) : boolean
+    +etreMort() : boolean
+    +perdrePv(int degat) : void
+    +attaquer(Entitee e) : boolean
+    +getPos() : Position
+    +getPv() : int
+}
 
 
 Labyrinthe "1"-->"1" Perso : +pj
@@ -130,6 +135,8 @@ BoutonFermeture "1"-->"1" PassageSecret : +passageSecret
 BoutonFermeture "1"-->"1" Position : -pos
 Perso "1"-->"1" Position : -pos
 Monstre "1"-->"1" Position : -pos
+Perso --|> Entite
+Monstre --|> Entite
 PassageSecret "1"-->"1" Position : -pos
 BoutonOuverture "1"-->"1" Position : -pos
 
