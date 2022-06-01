@@ -236,6 +236,13 @@ public class Labyrinthe {
         //on recupere le meilleur chemin vers le perso
         //ce chin inclu la position du monstre et du perso
         ArrayList<Position> chemin = this.recherche(m.getPos());
+        ArrayList<Position> chemin2;
+        for (int i = 0; i < 100; i++) {
+            chemin2 = this.recherche(m.getPos());
+            if (chemin2.size()<chemin.size()){
+                chemin = chemin2;
+            }
+        }
         //si il n'y a aucun chemin vers le perssonage on fait un mouvement aleatoire
         switch (chemin.size()) {
             case 0:
@@ -377,12 +384,20 @@ public class Labyrinthe {
         if (this.pj.getPos().posEquals(x, y)) {
             valeurCase = PJ;
         } else {
-            //sinon si la case contient la sortie
-            if (this.passageSecret.getPos().posEquals(x, y)) {
-                valeurCase = PASSAGE;
+            if (this.passageSecret != null) {
+                //sinon si la case contient la sortie
+                if (this.passageSecret.getPos().posEquals(x, y)) {
+                    valeurCase = PASSAGE;
+                } else {
+                    valeurCase = VIDE;
+                }
             } else {
-                if (this.boutonOuverture.getPos().posEquals(x, y)) {
-                    valeurCase = BOUTON;
+                if (this.passageSecret != null) {
+                    if (this.boutonOuverture.getPos().posEquals(x, y)) {
+                        valeurCase = BOUTON;
+                    } else {
+                        valeurCase = VIDE;
+                    }
                 } else {
                     //si la case est vide
                     if (!this.murs[x][y]) {
