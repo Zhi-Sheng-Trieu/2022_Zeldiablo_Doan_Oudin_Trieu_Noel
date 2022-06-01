@@ -1,4 +1,26 @@
-Attaque du joueur : OUDIN Clement, DOAN Lancelot
+Attaque du joueur et mort du monstre :
+OUDIN Clement
+DOAN Lancelot
+
+Critère de validation :
+- L'attaque a lieu quand le joueur appuie sur la touche
+- Tous les monstres a cotes du joueur prennent un point de dégat
+- Tous les monstres éloignés du joueur ne prennent pas de dégats
+- Si il n'y a aucun monstre a proximité du joueur, l'action a quand meme lieu
+
+- Les monstres ont par défaut 2 pv
+- lorsqu'un monstre est touché deux fois, il meurt et disparait
+- le joueur attaque avant le monstre
+
+Bilan :
+
+La réalisation de ces fonctionnalités s'est bien déroulé.
+Les attaques ont bien lieu et inflige le nombre de dégats exigés.
+Une attaque compte comme une action, ce qui influt le déplacement des monstres.
+La mort du monstre s'est faite au meme moment.
+Le monstre disparait à sa mort et posséde seulement 2 pv.
+
+
 
 Monstres au comportement intelligent : Noel Alexandre, Trieu Zhi-Sheng
 
