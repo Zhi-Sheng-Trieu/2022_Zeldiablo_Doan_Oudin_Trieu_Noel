@@ -34,6 +34,11 @@ class LabyJeu{
 }
 
 LabyJeu ..|> Jeu
+LabyJeu "1"->"1" Perso : -personnage
+LabyJeu "1"->"*" Monstre : -monstre
+LabyJeu "1"->"1" PassageSecret : -passageSecret
+LabyJeu "1"->"1" BoutonOuverture : -boutonOuverture
+LabyJeu "1"->"1" BoutonFermeture : -boutonFermeture
 LabyJeu "1"-->"1" Labyrinthe : -lab
 
 
@@ -63,6 +68,8 @@ class Labyrinthe{
     +getMonstre() : ArrayList<Monstre>
     +getBoutonOuverture() : BoutonOuverture
     +getBoutonFermeture() : BoutonFermeture
+    +recherche(Position p) : ArrayList<Position>
+    +voisins(Position p) : ArrayList<Position>
 
 
 }
@@ -114,7 +121,7 @@ class Position {
 
 
 Labyrinthe "1"-->"1" Perso : +pj
-Labyrinthe "1"-->"*" Monstre : +monstre
+Labyrinthe "1"-->"1" Monstre : +monstre
 Labyrinthe "1"-->"1" PassageSecret : -passageSecret
 Labyrinthe "1"-->"1" BoutonOuverture : -bouton
 Labyrinthe "1"-->"1" BoutonFermeture : -boutonFermeture
