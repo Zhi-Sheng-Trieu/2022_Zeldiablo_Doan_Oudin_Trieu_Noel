@@ -68,4 +68,14 @@ public class TestMonstre {
         assertEquals(labyJeu.getPj().getPos().getY(), y, "Le joueur n aurait pas du bouger");
 
     }
+
+    @Test
+    public void test4_attaque_joueur() throws IOException {
+        LabyJeu labyJeu = new LabyJeu("zeldiablo/labySimple/labyMonstreProcheJoueur.txt");
+        Clavier clavier = new Clavier();
+        assertEquals(2,labyJeu.getMonstre().get(0).getPv(),"Le monstre doit avoir 2 pv");
+        clavier.setSpace(true);
+        labyJeu.update(15,clavier);
+        assertEquals(1,labyJeu.getMonstre().get(0).getPv(),"Le monstre doit perdre des pv");
+    }
 }
