@@ -3,9 +3,7 @@
 title Diagramme de Sequence de déplacement aléatoire de monstre
 
 participant "main" as main
-participant "moteur : MoteurJeu" as moteur
 participant "labyJeu : LabyJeu" as labyJeu
-participant "labyDessin : LabyDessin" as labyDessin
 participant "laby : Labyrinthe" as laby
 participant "personnage : Perso" as personnage
 participant "monstre : Monstre" as monstre
@@ -14,14 +12,7 @@ participant "monstre : Monstre" as monstre
 
 
 activate main
-    main -> moteur : setTaille(width, height)
-    moteur --> main
-    main -> moteur : setFPS(fps)
-    moteur --> main
-    create labyJeu
-    main -> labyJeu : new
-    create labyDessin
-    main -> labyDessin : new
+
 
     activate labyJeu
         main -> labyJeu : update(15.0, "Droite")
@@ -29,6 +20,7 @@ activate main
         activate laby
             labyJeu -> laby : deplacerPerso("droite")
             activate personnage
+                laby -> laby : int[] suivante = getSuivant(courante[0], courante[1], action)
                 laby -> personnage : setX(suivante[0])
                 personnage --> laby
                 laby -> personnage : setY(suivante[1])
@@ -36,12 +28,12 @@ activate main
             deactivate personnage
             laby -> laby : deplacerMonstre(value)
             activate monstre
+                laby -> laby : int[] suivante = getSuivant(courante[0], courante[1], action)
                 laby -> monstre : setX(suivante[0])
                 monstre --> laby
                 laby -> monstre : setX(suivante[1])
                 monstre --> laby
             deactivate monstre
-            laby -> laby : getSuivant(courante[0], courante[1], action)
             laby -> laby : deplacementPossible(suivante)
             laby --> labyJeu
         deactivate laby
@@ -49,10 +41,7 @@ activate main
     labyJeu --> main
     deactivate labyJeu
 
-    main -> moteur : launch(labyJeu, labyDessin)
-    activate moteur
-    moteur -> main
-    deactivate moteur
+
 
 deactivate main
 

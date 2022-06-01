@@ -11,7 +11,7 @@ public abstract class Entitee {
 
     public Entitee(int dx, int dy){
         pos = new Position(dx,dy);
-        this.pv = 5;
+        this.pv = 2;
     }
 
     public Entitee(int dx, int dy,int pv){
