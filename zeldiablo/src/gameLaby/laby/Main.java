@@ -10,11 +10,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // charge le labyrinthe
-<<<<<<< HEAD
-        Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/labyPassageFermeture>.txt");
-=======
->>>>>>> commit
-
         Labyrinthe laby = new Labyrinthe("zeldiablo/labySimple/grandLaby.txt");
 
         System.out.println(laby);
