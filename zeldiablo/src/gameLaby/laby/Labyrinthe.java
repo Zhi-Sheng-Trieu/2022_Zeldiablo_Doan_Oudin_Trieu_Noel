@@ -175,12 +175,15 @@ public class Labyrinthe {
         //si on a trouvé un passage secret dans le fichier texte
         if (pos_passage != null) {
             this.passageSecret = new PassageSecret(pos_passage);
-        }
-        if (pos_bouton != null) {
-            this.boutonOuverture = new BoutonOuverture(pos_bouton, passageSecret);
-        }
-        if (pos_bouton_ferme != null) {
-            this.boutonFermeture = new BoutonFermeture(pos_bouton_ferme, passageSecret);
+
+            if (pos_bouton_ferme != null) {
+                this.boutonFermeture = new BoutonFermeture(pos_bouton_ferme, passageSecret);
+                passageSecret.ouvrirPassage();
+            }
+            if (pos_bouton != null) {
+                this.boutonOuverture = new BoutonOuverture(pos_bouton, passageSecret);
+                passageSecret.fermerPassage();
+            }
         }
 
         // ferme fichier
@@ -229,7 +232,8 @@ public class Labyrinthe {
      */
     public void deplacerMonstre(Monstre m) {
         // On choisi un nombre au hasard
-        int aleaNb = (int) Math.round(Math.random() * 3);
+        Random random = new Random();
+        int aleaNb = random.nextInt(4);
 
         String action = "";
 
